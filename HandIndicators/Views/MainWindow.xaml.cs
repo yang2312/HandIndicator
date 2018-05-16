@@ -1,4 +1,5 @@
 ﻿using HandIndicators.ViewModel;
+using System;
 using System.IO;
 using System.IO.Packaging;
 using System.Windows;
@@ -22,17 +23,35 @@ namespace HandIndicators.Views
 
         private void Calculate_Clicked(object sender, RoutedEventArgs e)
         {
-            ViewModelLocator.Instance.Main.Calculate();
+            if (ViewModelLocator.Instance.Main.IsDataValidated())
+            {
+                ViewModelLocator.Instance.Main.Calculate();
+            }
+            else
+            {
+                MessageBox.Show("Lưu ý các chỉ số phải > 0 và năm sinh không được để trống", "Alert", MessageBoxButton.OK);
+            }
         }
 
         private void Print_Clicked(object sender, RoutedEventArgs e)
         {
-            XpsDocument doc = new XpsDocument("D:/1.xps", FileAccess.ReadWrite);
+            string root = "D:/HandIndicator";
+            if (!Directory.Exists(root))
+            {
+                Directory.CreateDirectory(root);
+            }
+
+            string pathXPS = $"{root}/{ViewModelLocator.Instance.Main.Name}_{DateTime.Now.ToString("dd_MMM_yyyy_hh_mm_ss")}.xps";
+            string pathPDF = $"{root}/{ViewModelLocator.Instance.Main.Name}_{DateTime.Now.ToString("dd_MMM_yyyy_hh_mm_ss")}.pdf";
+
+            XpsDocument doc = new XpsDocument(pathXPS, FileAccess.ReadWrite);
             XpsDocumentWriter writer = XpsDocument.CreateXpsDocumentWriter(doc);
             writer.Write(MainContent);
             doc.Close();
-            
-            PdfSharp.Xps.XpsConverter.Convert("D:/1.xps", "D:/Test.pdf", 0);
+
+            PdfSharp.Xps.XpsConverter.Convert(pathXPS, pathPDF, 0);
+
+            MessageBox.Show($"In thành công. Xem file tại {pathPDF}", "Alert", MessageBoxButton.OK);
         }
         
         private void Window_KeyDown(object sender, KeyEventArgs e)

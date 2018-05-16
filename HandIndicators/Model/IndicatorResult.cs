@@ -16,16 +16,16 @@ namespace HandIndicators.Model
         {
             get
             {
-                double _x = _indicatorLeft.ATD * 100 / 35;
+                double _x = double.Parse(_indicatorLeft.ATD) * 100 / 35;
                 if (_x > 100) return 200 - _x;
                 return _x;
             }
         }
-        private double y
+        public double y
         {
             get
             {
-                double _y = _indicatorRight.ATD * 100 / 35;
+                double _y = double.Parse(_indicatorRight.ATD) * 100 / 35;
                 if (_y > 100) return 200 - _y;
                 return _y;
             }
@@ -38,7 +38,7 @@ namespace HandIndicators.Model
             _indicatorLeft = indicatorLeft;
             _indicatorRight = indicatorRight;
 
-            double atd = (_indicatorLeft.ATD + _indicatorRight.ATD) / 2;
+            double atd = (double.Parse(_indicatorLeft.ATD) + double.Parse(_indicatorRight.ATD)) / 2;
             if ((DateTime.Now.Year - int.Parse(year)) < 10)
             {
                 _atd = atd - (10 - (DateTime.Now.Year - int.Parse(year)));
@@ -47,11 +47,11 @@ namespace HandIndicators.Model
 
             foreach(FingerIndicator finger in indicatorLeft.ListFingers)
             {
-                _sumCAPL += finger.CAP;
+                _sumCAPL += double.Parse(finger.CAP);
             }
             foreach (FingerIndicator finger in indicatorRight.ListFingers)
             {
-                _sumCAPR += finger.CAP;
+                _sumCAPR += double.Parse(finger.CAP);
             }
         }
 
@@ -62,11 +62,11 @@ namespace HandIndicators.Model
                 double result = 0;
                 foreach(FingerIndicator finger in _indicatorLeft.ListFingers)
                 {
-                    result += finger.PI;
+                    result += double.Parse(finger.PI);
                 }
                 foreach (FingerIndicator finger in _indicatorRight.ListFingers)
                 {
-                    result += finger.PI;
+                    result += double.Parse(finger.PI);
                 }
                 return result;
             }
@@ -78,11 +78,11 @@ namespace HandIndicators.Model
                 double result = 0;
                 foreach (FingerIndicator finger in _indicatorLeft.ListFingers)
                 {
-                    result += (finger.PI * finger.CAP);
+                    result += (double.Parse(finger.PI) * double.Parse(finger.CAP));
                 }
                 foreach (FingerIndicator finger in _indicatorRight.ListFingers)
                 {
-                    result += (finger.PI * finger.CAP);
+                    result += (double.Parse(finger.PI) * double.Parse(finger.CAP));
                 }
                 return result;
             }
@@ -94,7 +94,7 @@ namespace HandIndicators.Model
                 double sumL = 0;
                 foreach(FingerIndicator finger in _indicatorLeft.ListFingers)
                 {
-                    sumL += finger.PI;
+                    sumL += double.Parse(finger.PI);
                 }
                 double result = (sumL * 100) / TFRC;
 
@@ -109,7 +109,7 @@ namespace HandIndicators.Model
                 double sumR = 0;
                 foreach (FingerIndicator finger in _indicatorRight.ListFingers)
                 {
-                    sumR += finger.PI;
+                    sumR += double.Parse(finger.PI);
                 }
                 double result = (sumR * 100) / TFRC;
 
@@ -121,70 +121,70 @@ namespace HandIndicators.Model
         {
             get
             {
-                return (x * _indicatorLeft.ListFingers[0].PI) / 100;
+                return (x * double.Parse(_indicatorLeft.ListFingers[0].PI)) / 100;
             }
         }
         public double RIL2
         {
             get
             {
-                return (x * _indicatorLeft.ListFingers[1].PI) / 100;
+                return (x * double.Parse(_indicatorLeft.ListFingers[1].PI)) / 100;
             }
         }
         public double RIL3
         {
             get
             {
-                return (x * _indicatorLeft.ListFingers[2].PI) / 100;
+                return (x * double.Parse(_indicatorLeft.ListFingers[2].PI)) / 100;
             }
         }
         public double RIL4
         {
             get
             {
-                return (x * _indicatorLeft.ListFingers[3].PI) / 100;
+                return (x * double.Parse(_indicatorLeft.ListFingers[3].PI)) / 100;
             }
         }
         public double RIL5
         {
             get
             {
-                return (x * _indicatorLeft.ListFingers[4].PI) / 100;
+                return (x * double.Parse(_indicatorLeft.ListFingers[4].PI)) / 100;
             }
         }
         public double RIR1
         {
             get
             {
-                return (y * _indicatorRight.ListFingers[0].PI) / 100;
+                return (y * double.Parse(_indicatorRight.ListFingers[0].PI)) / 100;
             }
         }
         public double RIR2
         {
             get
             {
-                return (x * _indicatorRight.ListFingers[1].PI) / 100;
+                return (x * double.Parse(_indicatorRight.ListFingers[1].PI)) / 100;
             }
         }
         public double RIR3
         {
             get
             {
-                return (x * _indicatorRight.ListFingers[2].PI) / 100;
+                return (x * double.Parse(_indicatorRight.ListFingers[2].PI)) / 100;
             }
         }
         public double RIR4
         {
             get
             {
-                return (x * _indicatorRight.ListFingers[3].PI) / 100;
+                return (x * double.Parse(_indicatorRight.ListFingers[3].PI)) / 100;
             }
         }
         public double RIR5
         {
             get
             {
-                return (x * _indicatorRight.ListFingers[4].PI) / 100;
+                return (x * double.Parse(_indicatorRight.ListFingers[4].PI)) / 100;
             }
         }
 
@@ -225,35 +225,35 @@ namespace HandIndicators.Model
         {
             get
             {
-                return (_indicatorLeft.ListFingers[0].PI * 100 / TFRC) + (_indicatorRight.ListFingers[0].PI * 100 / TFRC);
+                return (double.Parse(_indicatorLeft.ListFingers[0].PI) * 100 / TFRC) + (double.Parse(_indicatorRight.ListFingers[0].PI) * 100 / TFRC);
             }
         }
         public double T_PB
         {
             get
             {
-                return (_indicatorLeft.ListFingers[1].PI * 100 / TFRC) + (_indicatorRight.ListFingers[1].PI * 100 / TFRC);
+                return (double.Parse(_indicatorLeft.ListFingers[1].PI) * 100 / TFRC) + (double.Parse(_indicatorRight.ListFingers[1].PI) * 100 / TFRC);
             }
         }
         public double D_PB
         {
             get
             {
-                return (_indicatorLeft.ListFingers[2].PI * 100 / TFRC) + (_indicatorRight.ListFingers[2].PI * 100 / TFRC);
+                return (double.Parse(_indicatorLeft.ListFingers[2].PI) * 100 / TFRC) + (double.Parse(_indicatorRight.ListFingers[2].PI) * 100 / TFRC);
             }
         }
         public double TD_PB
         {
             get
             {
-                return (_indicatorLeft.ListFingers[3].PI * 100 / TFRC) + (_indicatorRight.ListFingers[3].PI * 100 / TFRC);
+                return (double.Parse(_indicatorLeft.ListFingers[3].PI) * 100 / TFRC) + (double.Parse(_indicatorRight.ListFingers[3].PI) * 100 / TFRC);
             }
         }
         public double C_PB
         {
             get
             {
-                return (_indicatorLeft.ListFingers[4].PI * 100 / TFRC) + (_indicatorRight.ListFingers[4].PI * 100 / TFRC);
+                return (double.Parse(_indicatorLeft.ListFingers[4].PI) * 100 / TFRC) + (double.Parse(_indicatorRight.ListFingers[4].PI) * 100 / TFRC);
             }
         }
     }

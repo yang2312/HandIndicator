@@ -9,8 +9,8 @@ namespace HandIndicators.Model
 {
     public class FingerIndicator: ObservableObject
     {
-        private double _pi;
-        public double PI
+        private string _pi;
+        public string PI
         {
             get { return _pi; }
             set
@@ -29,14 +29,30 @@ namespace HandIndicators.Model
                 RaisePropertyChanged(nameof(Type));
             }
         }
-        private double _cap;
-        public double CAP
+        private string _cap;
+        public string CAP
         {
             get { return _cap; }
             set
             {
                 _cap = value;
                 RaisePropertyChanged(nameof(CAP));
+            }
+        }
+
+        public bool IsValidated
+        {
+            get
+            {
+                try
+                {
+                    return !string.IsNullOrEmpty(Type) && double.Parse(PI) > 0 && double.Parse(CAP) > 0;
+                }
+                catch
+                {
+                    return false;
+                }
+                
             }
         }
     }

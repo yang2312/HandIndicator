@@ -120,8 +120,8 @@ namespace HandIndicators.ViewModel
             }
         }
 
-        private double _atdL;
-        public double ATDL
+        private string _atdL;
+        public string ATDL
         {
             get { return _atdL; }
             set
@@ -130,8 +130,8 @@ namespace HandIndicators.ViewModel
                 RaisePropertyChanged();
             }
         }
-        private double _atdR;
-        public double ATDR
+        private string _atdR;
+        public string ATDR
         {
             get { return _atdR; }
             set
@@ -193,6 +193,19 @@ namespace HandIndicators.ViewModel
         {
             IndicatorResult = new IndicatorResult(new HandIndicator(new ObservableCollection<FingerIndicator>() { FingerL1,FingerL2,FingerL3,FingerL4,FingerL5},ATDL), 
                                                   new HandIndicator(new ObservableCollection<FingerIndicator>() { FingerR1, FingerR2, FingerR3, FingerR4, FingerR5}, ATDL),Year);
+        }
+        public bool IsDataValidated()
+        {
+            try
+            {
+                return !string.IsNullOrEmpty(Year) && (double.Parse(ATDL) > 0) && (double.Parse(ATDR) > 0) && FingerL1.IsValidated && FingerL2.IsValidated && FingerL3.IsValidated
+                && FingerL4.IsValidated && FingerL5.IsValidated && FingerR1.IsValidated && FingerR2.IsValidated && FingerR3.IsValidated && FingerR4.IsValidated && FingerR5.IsValidated;
+            }
+            catch
+            {
+                return false;
+            }
+            
         }
         #endregion
         

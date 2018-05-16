@@ -10,8 +10,8 @@ namespace HandIndicators.Model
 {
     public class HandIndicator: ObservableObject
     {
-        private double _atd;
-        public double ATD
+        private string _atd;
+        public string ATD
         {
             get { return _atd; }
             set
@@ -32,7 +32,7 @@ namespace HandIndicators.Model
             }
         }
 
-        public HandIndicator(ObservableCollection<FingerIndicator> listFingers,double atd)
+        public HandIndicator(ObservableCollection<FingerIndicator> listFingers, string atd)
         {
             ListFingers = listFingers;
             ATD = atd;
