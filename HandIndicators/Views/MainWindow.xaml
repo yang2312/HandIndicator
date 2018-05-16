@@ -1,0 +1,25 @@
+﻿<Window x:Class="HandIndicators.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HandIndicators.Views" WindowState="Maximized"
+        mc:Ignorable="d"
+        Title="Hand Indicators" Height="450" Width="800" KeyDown="Window_KeyDown">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Menu">
+                <MenuItem Header="Tính toán" Command="{Binding CalculateCommand}"  InputGestureText="F1"/>
+                <MenuItem Header="In" Click="Print_Clicked" InputGestureText="F2"/>
+                <Separator />
+                <MenuItem Header="_Exit" />
+            </MenuItem>
+        </Menu>
+
+        <Frame>
+            <Frame.Content>
+                <local:MainPage x:Name="MainContent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DockPanel.Dock="Bottom"/>
+            </Frame.Content>
+        </Frame>
+    </DockPanel>
+</Window>

@@ -1,0 +1,581 @@
+﻿<Page x:Class="HandIndicators.Views.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HandIndicators.Views"
+      mc:Ignorable="d" 
+      HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+      Title="MainPage">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <Style x:Key="FillTextBox" TargetType="TextBox">
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="TextAlignment" Value="Right"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+
+            <Style TargetType="Button" x:Key="CurveButton">
+                <Setter Property="Background" Value="White" />
+                <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="10" Background="White" BorderBrush="Green" BorderThickness="1" >
+                                <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style TargetType="GroupBox" x:Key="ReportGroup">
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="VerticalAlignment" Value="Stretch"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+
+            <DataTemplate x:Key="CustomItemTemplate">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="{Binding Name}"/>
+                    <Label Content=" = "/>
+                    <Label Content="{Binding Value}"/>
+                </StackPanel>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Page.Resources>
+    
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">
+            <Label Content="Họ và Tên :"/>
+            <TextBox Width="150" Style="{StaticResource FillTextBox}" Text="{Binding Name,Mode=TwoWay}"/>
+            <Label Content="Năm sinh :" Margin="10,0,0,0"/>
+            <TextBox Width="150" Style="{StaticResource FillTextBox}" Text="{Binding Year,Mode=TwoWay}"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1" HorizontalAlignment="Stretch" Margin="0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <GroupBox Header="Left Hand" HorizontalAlignment="Stretch" Height="180">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Grid.ColumnSpan="5" Margin="0,10">
+                        <Label Content="ATD:"/>
+                        <TextBox Width="150" Style="{StaticResource FillTextBox}" Text="{Binding ATDL}"/>
+                    </StackPanel>
+
+                    <GroupBox Header="L1" Height="110" Grid.Row="1" Grid.Column="0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Content="PI"/>
+                            <TextBox Grid.Column="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerL1.PI,Mode=TwoWay}"/>
+
+                            <Label Content="CAP" Grid.Row="1"/>
+                            <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerL1.CAP,Mode=TwoWay}"/>
+
+                            <ComboBox Grid.Row="2" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Margin="0,5" IsEditable="True" SelectedItem="{Binding FingerL1.Type,Mode=TwoWay}">
+                                <ComboBoxItem>U</ComboBoxItem>
+                                <ComboBoxItem>A</ComboBoxItem>
+                                <ComboBoxItem>W</ComboBoxItem>
+                            </ComboBox>
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="L2" Height="110" Margin="10,0,0,0" Grid.Row="1" Grid.Column="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Content="PI"/>
+                            <TextBox Grid.Column="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerL2.PI,Mode=TwoWay}"/>
+
+                            <Label Content="CAP" Grid.Row="1"/>
+                            <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerL2.CAP,Mode=TwoWay}"/>
+
+                            <ComboBox Grid.Row="2" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Margin="0,5" IsEditable="True" SelectedItem="{Binding FingerL2.Type,Mode=TwoWay}">
+                                <ComboBoxItem>A</ComboBoxItem>
+                                <ComboBoxItem>B</ComboBoxItem>
+                                <ComboBoxItem>C</ComboBoxItem>
+                            </ComboBox>
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="L3" Height="110" Margin="10,0,0,0" Grid.Row="1" Grid.Column="2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Content="PI"/>
+                            <TextBox Grid.Column="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerL3.PI,Mode=TwoWay}"/>
+
+                            <Label Content="CAP" Grid.Row="1"/>
+                            <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerL3.CAP,Mode=TwoWay}"/>
+
+                            <ComboBox Grid.Row="2" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Margin="0,5" IsEditable="True" SelectedItem="{Binding FingerL3.Type,Mode=TwoWay}">
+                                <ComboBoxItem>A</ComboBoxItem>
+                                <ComboBoxItem>B</ComboBoxItem>
+                                <ComboBoxItem>C</ComboBoxItem>
+                            </ComboBox>
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="L4" Height="110" Margin="10,0,0,0" Grid.Row="1" Grid.Column="3">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Content="PI"/>
+                            <TextBox Grid.Column="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerL4.PI,Mode=TwoWay}"/>
+
+                            <Label Content="CAP" Grid.Row="1"/>
+                            <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerL4.CAP,Mode=TwoWay}"/>
+
+                            <ComboBox Grid.Row="2" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Margin="0,5" IsEditable="True" SelectedItem="{Binding FingerL4.Type,Mode=TwoWay}">
+                                <ComboBoxItem>A</ComboBoxItem>
+                                <ComboBoxItem>B</ComboBoxItem>
+                                <ComboBoxItem>C</ComboBoxItem>
+                            </ComboBox>
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="L5" Height="110" Margin="10,0,0,0" Grid.Row="1" Grid.Column="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Content="PI"/>
+                            <TextBox Grid.Column="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerL5.PI,Mode=TwoWay}"/>
+
+                            <Label Content="CAP" Grid.Row="1"/>
+                            <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerL5.CAP,Mode=TwoWay}"/>
+
+                            <ComboBox Grid.Row="2" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Margin="0,5" IsEditable="True" Text="{Binding FingerL5.Type,Mode=TwoWay}">
+                                <ComboBoxItem>A</ComboBoxItem>
+                                <ComboBoxItem>B</ComboBoxItem>
+                                <ComboBoxItem>C</ComboBoxItem>
+                            </ComboBox>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </GroupBox>
+
+            <Border Width="1" Height="100" BorderBrush="Gray" BorderThickness="1" Margin="10" Grid.Column="1"/>
+
+            <GroupBox Header="Right Hand" HorizontalAlignment="Stretch" Height="180" Grid.Column="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Grid.ColumnSpan="5" Margin="0,10">
+                        <Label Content="ATD:"/>
+                        <TextBox Width="150" Style="{StaticResource FillTextBox}" Text="{Binding ATDR}"/>
+                    </StackPanel>
+
+                    <GroupBox Header="R1" Height="110" Grid.Row="1" Grid.Column="0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Content="PI"/>
+                            <TextBox Grid.Column="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerR1.PI,Mode=TwoWay}"/>
+
+                            <Label Content="CAP" Grid.Row="1"/>
+                            <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerR1.CAP,Mode=TwoWay}"/>
+
+                            <ComboBox Grid.Row="2" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Margin="0,5" IsEditable="True" SelectedItem="{Binding FingerR1.Type,Mode=TwoWay}">
+                                <ComboBoxItem>A</ComboBoxItem>
+                                <ComboBoxItem>B</ComboBoxItem>
+                                <ComboBoxItem>C</ComboBoxItem>
+                            </ComboBox>
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="R2" Height="110" Margin="10,0,0,0" Grid.Row="1" Grid.Column="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Content="PI"/>
+                            <TextBox Grid.Column="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerR2.PI,Mode=TwoWay}"/>
+
+                            <Label Content="CAP" Grid.Row="1"/>
+                            <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerR2.CAP,Mode=TwoWay}"/>
+
+                            <ComboBox Grid.Row="2" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Margin="0,5" IsEditable="True" SelectedItem="{Binding FingerR2.Type,Mode=TwoWay}">
+                                <ComboBoxItem>A</ComboBoxItem>
+                                <ComboBoxItem>B</ComboBoxItem>
+                                <ComboBoxItem>C</ComboBoxItem>
+                            </ComboBox>
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="R3" Height="110" Margin="10,0,0,0" Grid.Row="1" Grid.Column="2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Content="PI"/>
+                            <TextBox Grid.Column="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerR3.PI,Mode=TwoWay}"/>
+
+                            <Label Content="CAP" Grid.Row="1"/>
+                            <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerR3.CAP,Mode=TwoWay}"/>
+
+                            <ComboBox Grid.Row="2" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Margin="0,5" IsEditable="True" SelectedItem="{Binding FingerR3.Type,Mode=TwoWay}">
+                                <ComboBoxItem>A</ComboBoxItem>
+                                <ComboBoxItem>B</ComboBoxItem>
+                                <ComboBoxItem>C</ComboBoxItem>
+                            </ComboBox>
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="R4" Height="110" Margin="10,0,0,0" Grid.Row="1" Grid.Column="3">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Content="PI"/>
+                            <TextBox Grid.Column="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerR4.PI,Mode=TwoWay}"/>
+
+                            <Label Content="CAP" Grid.Row="1"/>
+                            <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerR4.CAP,Mode=TwoWay}"/>
+
+                            <ComboBox Grid.Row="2" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Margin="0,5" IsEditable="True" SelectedItem="{Binding FingerR4.Type,Mode=TwoWay}">
+                                <ComboBoxItem>A</ComboBoxItem>
+                                <ComboBoxItem>B</ComboBoxItem>
+                                <ComboBoxItem>C</ComboBoxItem>
+                            </ComboBox>
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="R5" Height="110" Margin="10,0,0,0" Grid.Row="1" Grid.Column="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Content="PI"/>
+                            <TextBox Grid.Column="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerR5.PI,Mode=TwoWay}"/>
+
+                            <Label Content="CAP" Grid.Row="1"/>
+                            <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerR5.CAP,Mode=TwoWay}"/>
+
+                            <ComboBox Grid.Row="2" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" Margin="0,5" IsEditable="True" SelectedItem="{Binding FingerR5.Type,Mode=TwoWay}">
+                                <ComboBoxItem>A</ComboBoxItem>
+                                <ComboBoxItem>B</ComboBoxItem>
+                                <ComboBoxItem>C</ComboBoxItem>
+                            </ComboBox>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </GroupBox>
+        </Grid>
+
+        <Border Grid.Row="2" HorizontalAlignment="Stretch" BorderBrush="Gray" BorderThickness="1"/>
+
+        <!--Report-->
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <GroupBox Header="Số liệu" Style="{StaticResource ReportGroup}" Grid.RowSpan="3">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="TFRC = "/>
+                        <Label Content="{Binding IndicatorResult.TFRC}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="TAFRC = "/>
+                        <Label Content="{Binding IndicatorResult.TAFRC}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Tổng %L = "/>
+                        <Label Content="{Binding IndicatorResult.SumPercentL}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Tổng %R = "/>
+                        <Label Content="{Binding IndicatorResult.SumPercentR}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="TR/I = "/>
+                        <Label Content="{Binding IndicatorResult.SumRI}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="R/I L1 = "/>
+                        <Label Content="{Binding IndicatorResult.RIL1}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="R/I L2 = "/>
+                        <Label Content="{Binding IndicatorResult.RIL2}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="R/I L3 = "/>
+                        <Label Content="{Binding IndicatorResult.RIL3}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="R/I L4 = "/>
+                        <Label Content="{Binding IndicatorResult.RIL4}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="R/I L5 = "/>
+                        <Label Content="{Binding IndicatorResult.RIL5}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="R/I R1 = "/>
+                        <Label Content="{Binding IndicatorResult.RIR1}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="R/I R2 = "/>
+                        <Label Content="{Binding IndicatorResult.RIR2}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="R/I R3 = "/>
+                        <Label Content="{Binding IndicatorResult.RIR3}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="R/I R4 = "/>
+                        <Label Content="{Binding IndicatorResult.RIR4}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="R/I R5 = "/>
+                        <Label Content="{Binding IndicatorResult.RIR5}"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Năng lực" Style="{StaticResource ReportGroup}" Grid.Column="1">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="NL = "/>
+                        <Label Content="{Binding IndicatorResult.NL}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="TT = "/>
+                        <Label Content="{Binding IndicatorResult.TT_NL}"/>
+                    </StackPanel>
+                    
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Hoạt động L + R" Style="{StaticResource ReportGroup}" Grid.Column="2">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="AL = "/>
+                        <Label Content="{Binding IndicatorResult.AL}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="AR = "/>
+                        <Label Content="{Binding IndicatorResult.AR}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Tổng %L = "/>
+                        <Label Content="{Binding IndicatorResult.SumPercentL}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Tổng %R = "/>
+                        <Label Content="{Binding IndicatorResult.SumPercentR}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="HS %L = "/>
+                        <Label Content="{Binding IndicatorResult.x}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="HS %R = "/>
+                        <Label Content="{Binding IndicatorResult.y}"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Phân bố" Style="{StaticResource ReportGroup}" Grid.Column="3">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="TT = "/>
+                        <Label Content="{Binding IndicatorResult.TT_PB}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="T = "/>
+                        <Label Content="{Binding IndicatorResult.T_PB}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Đ = "/>
+                        <Label Content="{Binding IndicatorResult.D_PB}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="TD = "/>
+                        <Label Content="{Binding IndicatorResult.TD_PB}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="C = "/>
+                        <Label Content="{Binding IndicatorResult.C_PB}"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Chỉ số" Style="{StaticResource ReportGroup}" Grid.Row="1" Grid.Column="1">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="E = "/>
+                        <Label Content="{Binding IndicatorResult.TFRC}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="I = "/>
+                        <Label Content="{Binding IndicatorResult.TFRC}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="A = "/>
+                        <Label Content="{Binding IndicatorResult.TFRC}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="C = "/>
+                        <Label Content="{Binding IndicatorResult.TFRC}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="P = "/>
+                        <Label Content="{Binding IndicatorResult.TFRC}"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="8 TMBS" Style="{StaticResource ReportGroup}" Grid.Row="1" Grid.Column="2">
+                <ListView ItemTemplate="{StaticResource CustomItemTemplate}"/>
+            </GroupBox>
+
+            <GroupBox Header="8 TMTĐ" Style="{StaticResource ReportGroup}" Grid.Row="1" Grid.Column="3">
+                <ListView ItemTemplate="{StaticResource CustomItemTemplate}"/>
+            </GroupBox>
+
+            <GroupBox Header="VAKBĐ" Style="{StaticResource ReportGroup}" Grid.Row="2" Grid.Column="1">
+                <ListView ItemTemplate="{StaticResource CustomItemTemplate}"/>
+            </GroupBox>
+
+            <GroupBox Header="VAKCĐ" Style="{StaticResource ReportGroup}" Grid.Row="2" Grid.Column="2">
+                <ListView ItemTemplate="{StaticResource CustomItemTemplate}"/>
+            </GroupBox>
+            <GroupBox Header="NĐ_PT" Style="{StaticResource ReportGroup}" Grid.Row="2" Grid.Column="3">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="NĐ = "/>
+                        <Label Content="{Binding IndicatorResult.TFRC}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="PT = "/>
+                        <Label Content="{Binding IndicatorResult.TFRC}"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+        
+    </Grid>
+</Page>
