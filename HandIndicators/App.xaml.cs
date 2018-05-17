@@ -11,15 +11,7 @@ namespace HandIndicators
     {
         public App()
         {
-            try
-            {
-                MainWindow = new MainWindow();
-            }
-            catch(Exception c)
-            {
-
-            }
-            
+            MainWindow = new MainWindow();
         }
         protected override void OnExit(ExitEventArgs e)
         {

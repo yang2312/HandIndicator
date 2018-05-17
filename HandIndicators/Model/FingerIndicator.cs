@@ -46,13 +46,78 @@ namespace HandIndicators.Model
             {
                 try
                 {
-                    return !string.IsNullOrEmpty(Type) && double.Parse(PI) > 0 && double.Parse(CAP) > 0;
+                    return !string.IsNullOrEmpty(Type) && (Type.StartsWith("W") || Type.StartsWith("U") || Type.StartsWith("A")) && double.Parse(PI) > 0 && double.Parse(CAP) > 0;
                 }
                 catch
                 {
                     return false;
                 }
                 
+            }
+        }
+        private double _ai;
+        public double AI
+        {
+            get
+            {
+                return _ai;
+            }
+            set
+            {
+                _ai = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private double _ri;
+        public double RI
+        {
+            get
+            {
+                return _ri;
+            }
+            set
+            {
+                _ri = value;
+                RaisePropertyChanged();
+            }
+        }
+        private int _indexPI;
+        public int IndexPI
+        {
+            get
+            {
+                return _indexPI;
+            }
+            set
+            {
+                _indexPI = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private int _indexRI;
+        public int IndexRI
+        {
+            get
+            {
+                return _indexRI;
+            }
+            set
+            {
+                _indexRI = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private string _name;
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                RaisePropertyChanged();
             }
         }
     }

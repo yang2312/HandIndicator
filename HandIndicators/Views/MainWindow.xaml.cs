@@ -29,7 +29,7 @@ namespace HandIndicators.Views
             }
             else
             {
-                MessageBox.Show("Lưu ý các chỉ số phải > 0 và năm sinh không được để trống", "Alert", MessageBoxButton.OK);
+                MessageBox.Show("Lưu ý các chỉ số phải > 0 + Năm sinh không được để trống + Loại phải bắt đầu bằng W/U/A", "Alert", MessageBoxButton.OK);
             }
         }
 

@@ -38,9 +38,19 @@
 
             <DataTemplate x:Key="CustomItemTemplate">
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="{Binding Name}"/>
+                    <Label Content="{Binding Label}"/>
                     <Label Content=" = "/>
                     <Label Content="{Binding Value}"/>
+                </StackPanel>
+            </DataTemplate>
+            <DataTemplate x:Key="CustomPercentItemTemplate">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="{Binding Label}"/>
+                    <Label Content=" = "/>
+                    <Label Content="{Binding Value}"/>
+                    <Label Content="%"/>
+                    <Label Content="-"/>
+                    <Label Content="{Binding Index}"/>
                 </StackPanel>
             </DataTemplate>
         </ResourceDictionary>
@@ -379,8 +389,8 @@
         <Grid Grid.Row="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="1.5*"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -390,11 +400,11 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <GroupBox Header="Số liệu" Style="{StaticResource ReportGroup}" Grid.RowSpan="3">
+            <GroupBox Header="Số liệu" Style="{StaticResource ReportGroup}" Grid.RowSpan="2">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
                         <Label Content="TFRC = "/>
-                        <Label Content="{Binding IndicatorResult.TFRC,StringFormat={}{0:#.##}}"/>
+                        <Label Content="{Binding IndicatorResult.TFRC,StringFormat={}{0:0.00}}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="TAFRC = "/>
@@ -410,7 +420,7 @@
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="TR/I = "/>
-                        <Label Content="{Binding IndicatorResult.SumRI,StringFormat={}{0:#.##}}"/>
+                        <Label Content="{Binding IndicatorResult.SumRI,StringFormat={}{0:0.00}}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="R/I L1 = "/>
@@ -527,42 +537,39 @@
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
                         <Label Content="E = "/>
-                        <Label Content="{Binding IndicatorResult.TFRC,StringFormat={}{0:#.##}}"/>
+                        <Label Content="{Binding IndicatorResult.E_CS,StringFormat={}{0:#.##}}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="I = "/>
-                        <Label Content="{Binding IndicatorResult.TFRC,StringFormat={}{0:#.##}}"/>
+                        <Label Content="{Binding IndicatorResult.I_CS,StringFormat={}{0:#.##}}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="A = "/>
-                        <Label Content="{Binding IndicatorResult.TFRC,StringFormat={}{0:#.##}}"/>
+                        <Label Content="{Binding IndicatorResult.A_CS,StringFormat={}{0:#.##}}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="C = "/>
-                        <Label Content="{Binding IndicatorResult.TFRC,StringFormat={}{0:#.##}}"/>
+                        <Label Content="{Binding IndicatorResult.C_CS,StringFormat={}{0:#.##}}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="P = "/>
-                        <Label Content="{Binding IndicatorResult.TFRC,StringFormat={}{0:#.##}}"/>
+                        <Label Content="{Binding IndicatorResult.P_CS,StringFormat={}{0:#.##}}"/>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
 
             <GroupBox Header="8 TMBS" Style="{StaticResource ReportGroup}" Grid.Row="1" Grid.Column="2">
-                <ListView ItemTemplate="{StaticResource CustomItemTemplate}"/>
+                <ListView ItemTemplate="{StaticResource CustomItemTemplate}" ItemsSource="{Binding IndicatorResult.ListTMBS,UpdateSourceTrigger=PropertyChanged}"/>
             </GroupBox>
 
             <GroupBox Header="8 TMTĐ" Style="{StaticResource ReportGroup}" Grid.Row="1" Grid.Column="3">
-                <ListView ItemTemplate="{StaticResource CustomItemTemplate}"/>
+                <ListView ItemTemplate="{StaticResource CustomItemTemplate}" ItemsSource="{Binding IndicatorResult.ListTMTD,UpdateSourceTrigger=PropertyChanged}"/>
             </GroupBox>
 
-            <GroupBox Header="VAKBĐ" Style="{StaticResource ReportGroup}" Grid.Row="2" Grid.Column="1">
-                <ListView ItemTemplate="{StaticResource CustomItemTemplate}"/>
+            <GroupBox Header="VAKBĐ" Style="{StaticResource ReportGroup}" Grid.Row="2" Grid.Column="2">
+                <ListView ItemTemplate="{StaticResource CustomPercentItemTemplate}" ItemsSource="{Binding IndicatorResult.ListVAK,UpdateSourceTrigger=PropertyChanged}"/>
             </GroupBox>
-
-            <GroupBox Header="VAKCĐ" Style="{StaticResource ReportGroup}" Grid.Row="2" Grid.Column="2">
-                <ListView ItemTemplate="{StaticResource CustomItemTemplate}"/>
-            </GroupBox>
+            
             <GroupBox Header="NĐ_PT" Style="{StaticResource ReportGroup}" Grid.Row="2" Grid.Column="3">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
@@ -574,6 +581,22 @@
                         <Label Content="{Binding IndicatorResult.TFRC,StringFormat={}{0:#.##}}"/>
                     </StackPanel>
                 </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Bảng so sánh" Style="{StaticResource ReportGroup}" Grid.Row="2" Grid.ColumnSpan="2">
+                <ListView ItemTemplate="{StaticResource CustomPercentItemTemplate}" ItemsSource="{Binding IndicatorResult.SortedListData,UpdateSourceTrigger=PropertyChanged}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn  Width="100" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="PI" Width="100" DisplayMemberBinding="{Binding PI}"/>
+                            <GridViewColumn Header="Index PI" Width="100" DisplayMemberBinding="{Binding IndexPI}"/>
+                            <GridViewColumn Header="AI" Width="100" DisplayMemberBinding="{Binding AI}"/>
+                            <GridViewColumn  Width="100" Header="RI" DisplayMemberBinding="{Binding RI}"/>
+                            <GridViewColumn Header="Index RI" Width="100" DisplayMemberBinding="{Binding IndexRI}"/>
+                            <GridViewColumn Header="Type" Width="100" DisplayMemberBinding="{Binding Type}"/>
+                        </GridView>
+                    </ListView.View>    
+                </ListView>
             </GroupBox>
         </Grid>
         
