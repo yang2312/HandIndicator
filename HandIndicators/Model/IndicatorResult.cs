@@ -373,67 +373,62 @@ namespace HandIndicators.Model
             }
         }
 
-        public ObservableCollection<SortedItem> ListTMBS
+        public ObservableCollection<SortedItemWithIndex> ListTMBS
         {
             get
             {
-                var list = new ObservableCollection<SortedItem>() { new SortedItem { Label="L1",Value= Math.Round(double.Parse(_indicatorLeft.ListFingers[0].PI),2)},
-                                                                    new SortedItem { Label="R2",Value= Math.Round(double.Parse(_indicatorRight.ListFingers[1].PI),2)},
-                                                                    new SortedItem { Label="(L3 + R3) / 2",Value= Math.Round(((double.Parse(_indicatorLeft.ListFingers[2].PI) + double.Parse(_indicatorRight.ListFingers[2].PI)) / 2),2)},
-                                                                    new SortedItem { Label="R4",Value= Math.Round(double.Parse(_indicatorRight.ListFingers[3].PI),2)},
-                                                                    new SortedItem { Label="L2",Value= Math.Round(double.Parse(_indicatorLeft.ListFingers[1].PI),2)},
-                                                                    new SortedItem { Label="(L5 + R5) / 2",Value= Math.Round(((double.Parse(_indicatorLeft.ListFingers[4].PI) + double.Parse(_indicatorRight.ListFingers[4].PI)) / 2),2)},
-                                                                    new SortedItem { Label="L4",Value= Math.Round(double.Parse(_indicatorLeft.ListFingers[0].PI),2)},
-                                                                    new SortedItem { Label="R1",Value= Math.Round(double.Parse(_indicatorRight.ListFingers[0].PI),2)}};
+                var list = new ObservableCollection<SortedItemWithIndex>() { new SortedItemWithIndex { Label="XH",Value= Math.Round(double.Parse(_indicatorLeft.ListFingers[0].PI),2)},
+                                                                    new SortedItemWithIndex { Label="LG",Value= Math.Round(double.Parse(_indicatorRight.ListFingers[1].PI),2)},
+                                                                    new SortedItemWithIndex { Label="VD",Value= Math.Round(((double.Parse(_indicatorLeft.ListFingers[2].PI) + double.Parse(_indicatorRight.ListFingers[2].PI)) / 2),2)},
+                                                                    new SortedItemWithIndex { Label="NN",Value= Math.Round(double.Parse(_indicatorRight.ListFingers[3].PI),2)},
+                                                                    new SortedItemWithIndex { Label="TN",Value= Math.Round(double.Parse(_indicatorLeft.ListFingers[1].PI),2)},
+                                                                    new SortedItemWithIndex { Label="TG",Value= Math.Round(((double.Parse(_indicatorLeft.ListFingers[4].PI) + double.Parse(_indicatorRight.ListFingers[4].PI)) / 2),2)},
+                                                                    new SortedItemWithIndex { Label="AN",Value= Math.Round(double.Parse(_indicatorLeft.ListFingers[0].PI),2)},
+                                                                    new SortedItemWithIndex { Label="NT",Value= Math.Round(double.Parse(_indicatorRight.ListFingers[0].PI),2)}};
 
-                return new ObservableCollection<SortedItem>(list.OrderBy(x => x.Value).ToList());
+                foreach (var item in list)
+                {
+                    item.Index = list.OrderBy(x => x.Value).ToList().IndexOf(item) + 1;
+                }
+
+                return list;
             }
         }
 
-        public ObservableCollection<SortedItem> ListTMTD
+        public ObservableCollection<SortedItemWithIndex> ListTMTD
         {
             get
             {
-                var list = new ObservableCollection<SortedItem>() { new SortedItem { Label="L1 x CAPL1",Value= Math.Round(double.Parse(_indicatorLeft.ListFingers[0].PI) * double.Parse(_indicatorLeft.ListFingers[0].CAP),2)},
-                                                                    new SortedItem { Label="L2 x CAPL2",Value= Math.Round(double.Parse(_indicatorLeft.ListFingers[1].PI) * double.Parse(_indicatorLeft.ListFingers[1].CAP),2)},
-                                                                    new SortedItem { Label="((L3 x CAPL3)+(R3 x CAPR3)) / 2",
+                var list = new ObservableCollection<SortedItemWithIndex>() { new SortedItemWithIndex { Label="XH",Value= Math.Round(double.Parse(_indicatorLeft.ListFingers[0].PI) * double.Parse(_indicatorLeft.ListFingers[0].CAP),2)},
+                                                                    new SortedItemWithIndex { Label="LG",Value= Math.Round(double.Parse(_indicatorLeft.ListFingers[1].PI) * double.Parse(_indicatorLeft.ListFingers[1].CAP),2)},
+                                                                    new SortedItemWithIndex { Label="VD",
                                                                                     Value = Math.Round((((double.Parse(_indicatorLeft.ListFingers[2].PI) * double.Parse(_indicatorLeft.ListFingers[2].CAP)) + (double.Parse(_indicatorRight.ListFingers[2].PI) * double.Parse(_indicatorRight.ListFingers[2].PI))) / 2),2)},
-                                                                    new SortedItem { Label="L4 x CAPL4",Value= Math.Round(double.Parse(_indicatorLeft.ListFingers[3].PI) * double.Parse(_indicatorLeft.ListFingers[3].CAP),2)},
-                                                                    new SortedItem { Label="((L5 x CAPL5)+(R5 x CAPR5)) / 2",Value= Math.Round((((double.Parse(_indicatorLeft.ListFingers[4].PI) * double.Parse(_indicatorLeft.ListFingers[4].CAP)) + (double.Parse(_indicatorRight.ListFingers[4].PI) * double.Parse(_indicatorRight.ListFingers[4].PI))) / 2),2)},
-                                                                    new SortedItem { Label="R1 x CAPR1",Value= Math.Round(double.Parse(_indicatorRight.ListFingers[0].PI) * double.Parse(_indicatorRight.ListFingers[0].CAP),2)},
-                                                                    new SortedItem { Label="R2 x CAPR2",Value= Math.Round(double.Parse(_indicatorRight.ListFingers[1].PI) * double.Parse(_indicatorRight.ListFingers[1].CAP),2)},
-                                                                    new SortedItem { Label="R4 x CAPR4",Value= Math.Round(double.Parse(_indicatorRight.ListFingers[3].PI) * double.Parse(_indicatorRight.ListFingers[3].CAP),2)}};
+                                                                    new SortedItemWithIndex { Label="NN",Value= Math.Round(double.Parse(_indicatorLeft.ListFingers[3].PI) * double.Parse(_indicatorLeft.ListFingers[3].CAP),2)},
+                                                                    new SortedItemWithIndex { Label="TN",Value= Math.Round((((double.Parse(_indicatorLeft.ListFingers[4].PI) * double.Parse(_indicatorLeft.ListFingers[4].CAP)) + (double.Parse(_indicatorRight.ListFingers[4].PI) * double.Parse(_indicatorRight.ListFingers[4].PI))) / 2),2)},
+                                                                    new SortedItemWithIndex { Label="TG",Value= Math.Round(double.Parse(_indicatorRight.ListFingers[0].PI) * double.Parse(_indicatorRight.ListFingers[0].CAP),2)},
+                                                                    new SortedItemWithIndex { Label="AN",Value= Math.Round(double.Parse(_indicatorRight.ListFingers[1].PI) * double.Parse(_indicatorRight.ListFingers[1].CAP),2)},
+                                                                    new SortedItemWithIndex { Label="NT",Value= Math.Round(double.Parse(_indicatorRight.ListFingers[3].PI) * double.Parse(_indicatorRight.ListFingers[3].CAP),2)}};
 
-                return new ObservableCollection<SortedItem>(list.OrderBy(x => x.Value).ToList());
+                foreach(var item in list)
+                {
+                    item.Index = list.OrderBy(x => x.Value).ToList().IndexOf(item) + 1;
+                }
+
+                return list;
             }
         }
         public ObservableCollection<SortedItemWithIndex> ListVAK
         {
             get
             {
-                var list = new ObservableCollection<SortedItemWithIndex>() { new SortedItemWithIndex { Label="% V",Value= Math.Round(((double.Parse(_indicatorLeft.ListFingers[4].PI) + double.Parse(_indicatorRight.ListFingers[4].PI)) * 100) / _sumLastFingers,2)},
-                                                                             new SortedItemWithIndex { Label="% A",Value= Math.Round(((double.Parse(_indicatorLeft.ListFingers[3].PI) + double.Parse(_indicatorRight.ListFingers[3].PI)) * 100) / _sumLastFingers,2)},
-                                                                             new SortedItemWithIndex { Label="% K",Value= Math.Round(((double.Parse(_indicatorLeft.ListFingers[2].PI) + double.Parse(_indicatorRight.ListFingers[2].PI)) * 100) / _sumLastFingers,2)}};
+                var list = new ObservableCollection<SortedItemWithIndex>() { new SortedItemWithIndex { Label="V",Value= Math.Round(((double.Parse(_indicatorLeft.ListFingers[4].PI) + double.Parse(_indicatorRight.ListFingers[4].PI)) * 100) / _sumLastFingers,2)},
+                                                                             new SortedItemWithIndex { Label="A",Value= Math.Round(((double.Parse(_indicatorLeft.ListFingers[3].PI) + double.Parse(_indicatorRight.ListFingers[3].PI)) * 100) / _sumLastFingers,2)},
+                                                                             new SortedItemWithIndex { Label="K",Value= Math.Round(((double.Parse(_indicatorLeft.ListFingers[2].PI) + double.Parse(_indicatorRight.ListFingers[2].PI)) * 100) / _sumLastFingers,2)}};
 
-                list[0].Index = list.OrderBy(x => x.Value).ToList().IndexOf(list[0]) + 1;
-                list[1].Index = list.OrderBy(x => x.Value).ToList().IndexOf(list[1]) + 1;
-                list[2].Index = list.OrderBy(x => x.Value).ToList().IndexOf(list[2]) + 1;
-
-                return list;
-            }
-        }
-
-        public ObservableCollection<SortedItemWithIndex> ListVAK1
-        {
-            get
-            {
-                var list = new ObservableCollection<SortedItemWithIndex>() { new SortedItemWithIndex { Label="% V1",Value= (((double.Parse(_indicatorLeft.ListFingers[4].PI) * double.Parse(_indicatorLeft.ListFingers[4].CAP)) + (double.Parse(_indicatorRight.ListFingers[4].PI) * double.Parse(_indicatorRight.ListFingers[4].CAP))) * 100) / _sumLastFingers},
-                                                                             new SortedItemWithIndex { Label="% A1",Value= (((double.Parse(_indicatorLeft.ListFingers[3].PI) * double.Parse(_indicatorLeft.ListFingers[3].CAP)) + (double.Parse(_indicatorRight.ListFingers[3].PI) * double.Parse(_indicatorRight.ListFingers[3].CAP))) * 100) / _sumLastFingers},
-                                                                             new SortedItemWithIndex { Label="% K1",Value= (((double.Parse(_indicatorLeft.ListFingers[2].PI) * double.Parse(_indicatorLeft.ListFingers[2].CAP)) + (double.Parse(_indicatorRight.ListFingers[2].PI) * double.Parse(_indicatorRight.ListFingers[2].CAP))) * 100) / _sumLastFingers}};
-
-                list[0].Index = list.OrderBy(x => x.Value).ToList().IndexOf(list[0]) + 1;
-                list[1].Index = list.OrderBy(x => x.Value).ToList().IndexOf(list[1]) + 1;
-                list[2].Index = list.OrderBy(x => x.Value).ToList().IndexOf(list[2]) + 1;
+                foreach (var item in list)
+                {
+                    item.Index = list.OrderBy(x => x.Value).ToList().IndexOf(item) + 1;
+                }
 
                 return list;
             }
@@ -456,29 +451,19 @@ namespace HandIndicators.Model
                 }
 
                 var listOrderbyPI = list.OrderBy(x => double.Parse(x.PI)).ToList();
-                list[0].IndexPI = listOrderbyPI.IndexOf(list[0]) + 1;
-                list[1].IndexPI = listOrderbyPI.IndexOf(list[1]) + 1;
-                list[2].IndexPI = listOrderbyPI.IndexOf(list[2]) + 1;
-                list[3].IndexPI = listOrderbyPI.IndexOf(list[3]) + 1;
-                list[4].IndexPI = listOrderbyPI.IndexOf(list[4]) + 1;
-                list[5].IndexPI = listOrderbyPI.IndexOf(list[5]) + 1;
-                list[6].IndexPI = listOrderbyPI.IndexOf(list[6]) + 1;
-                list[7].IndexPI = listOrderbyPI.IndexOf(list[7]) + 1;
-                list[8].IndexPI = listOrderbyPI.IndexOf(list[8]) + 1;
-                list[9].IndexPI = listOrderbyPI.IndexOf(list[9]) + 1;
+
+                foreach (var item in listOrderbyPI)
+                {
+                    item.IndexPI = listOrderbyPI.IndexOf(item) + 1;
+                }
+                
 
                 var listOrderbyRI = list.OrderBy(x => x.RI).ToList();
-                list[0].IndexRI = listOrderbyRI.IndexOf(list[0]) + 1;
-                list[1].IndexRI = listOrderbyRI.IndexOf(list[1]) + 1;
-                list[2].IndexRI = listOrderbyRI.IndexOf(list[2]) + 1;
-                list[3].IndexRI = listOrderbyRI.IndexOf(list[3]) + 1;
-                list[4].IndexRI = listOrderbyRI.IndexOf(list[4]) + 1;
-                list[5].IndexRI = listOrderbyRI.IndexOf(list[5]) + 1;
-                list[6].IndexRI = listOrderbyRI.IndexOf(list[6]) + 1;
-                list[7].IndexRI = listOrderbyRI.IndexOf(list[7]) + 1;
-                list[8].IndexRI = listOrderbyRI.IndexOf(list[8]) + 1;
-                list[9].IndexRI = listOrderbyRI.IndexOf(list[9]) + 1;
-
+                foreach (var item in listOrderbyRI)
+                {
+                    item.IndexRI = listOrderbyRI.IndexOf(item) + 1;
+                }
+                
                 return list;
             }
         }
