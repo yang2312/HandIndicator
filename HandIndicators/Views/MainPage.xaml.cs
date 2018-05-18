@@ -1,8 +1,7 @@
 ﻿using HandIndicators.ViewModel;
-
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Text.RegularExpressions;
 
 namespace HandIndicators.Views
 {

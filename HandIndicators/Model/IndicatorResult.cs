@@ -1,10 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HandIndicators.Model
 {
@@ -76,37 +73,36 @@ namespace HandIndicators.Model
 
         private double CalculateAI(FingerIndicator finger,int index)
         {
-            double result = 0;
             switch (finger.Type.First())
             {
                 case 'W':
                     if(1.45 > double.Parse(finger.CAP))
                     {
                         double tempA = (1.45 - double.Parse(finger.CAP)) / 3;
-                        return 1.45 - tempA;
+                        return double.Parse(finger.PI) * (1.45 - tempA);
                     }
                     else if(1.45 == double.Parse(finger.CAP))
-                        return 1.45;
+                        return double.Parse(finger.PI) * 1.45;
                     else
                     {
                         double tempB = (double.Parse(finger.CAP) - 1.45) / 3;
-                        return 1.45 + tempB;
+                        return double.Parse(finger.PI) * (1.45 + tempB);
                     }
                 case 'U':
-                    if (index == 0 || index == 1 || index == 3) return 1.15;
-                    else if (index == 2) return 1.1;
-                    else return 1.2;
+                    if (index == 0 || index == 1 || index == 3) return double.Parse(finger.PI) * 1.15;
+                    else if (index == 2) return double.Parse(finger.PI) * 1.1;
+                    else return double.Parse(finger.PI) * 1.2;
                 default:
                     double temp = (x * 1.65) / 100;
                     if(double.Parse(finger.PI) <= 7)
                     {
                         double a = (7 - double.Parse(finger.PI)) * 0.04;
-                        return temp + a;
+                        return double.Parse(finger.PI) * (temp + a);
                     }
                     else
                     {
                         double b = (double.Parse(finger.PI) - 7) * 0.04;
-                        return temp - b;
+                        return double.Parse(finger.PI) * (temp - b);
                     }
             }
         }

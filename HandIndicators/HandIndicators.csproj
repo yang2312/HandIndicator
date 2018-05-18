@@ -142,7 +142,6 @@
     <Compile Include="Model\FingerIndicator.cs" />
     <Compile Include="Model\HandIndicator.cs" />
     <Compile Include="Model\IndicatorResult.cs" />
-    <Compile Include="Model\SortedItem.cs" />
     <Compile Include="Model\SortedItemWithIndex.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

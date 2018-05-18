@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GalaSoft.MvvmLight;
 
 namespace HandIndicators.Model
 {
-    public class SortedItemWithIndex: SortedItem
+    public class SortedItemWithIndex: ObservableObject
     {
+        public string Label { get; set; }
+        public double Value { get; set; }
         public int Index { get; set; }
     }
 }

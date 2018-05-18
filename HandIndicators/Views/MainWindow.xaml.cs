@@ -1,9 +1,7 @@
 ﻿using HandIndicators.ViewModel;
 using System;
 using System.IO;
-using System.IO.Packaging;
 using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
