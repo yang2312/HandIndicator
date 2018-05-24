@@ -376,6 +376,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <GroupBox Header="Số liệu" Style="{StaticResource ReportGroup}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
@@ -525,6 +526,22 @@
                 </StackPanel>
             </GroupBox>
 
+            <Grid Grid.Column="4" Grid.RowSpan="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <GroupBox Header="NKBS" Grid.Row="0">
+                    <ListView ItemTemplate="{StaticResource CustomIndexItemTemplate}" ItemsSource="{Binding IndicatorResult.ListNKBS,UpdateSourceTrigger=PropertyChanged}"/>
+                </GroupBox>
+
+                <GroupBox Header="NLNN" Grid.Row="1">
+                    <ListView ItemTemplate="{StaticResource CustomIndexItemTemplate}" ItemsSource="{Binding IndicatorResult.ListNLNN,UpdateSourceTrigger=PropertyChanged}"/>
+                </GroupBox>
+
+            </Grid>
+            
+            
             <GroupBox Header="Chỉ số" Style="{StaticResource ReportGroup}" Grid.Row="1" Grid.Column="1">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">

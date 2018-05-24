@@ -513,5 +513,49 @@ namespace HandIndicators.Model
                 return list;
             }
         }
+        public ObservableCollection<SortedItemWithIndex> ListNLNN
+        {
+            get
+            {
+                var list = new ObservableCollection<SortedItemWithIndex>() { new SortedItemWithIndex { Label="KT_CN",Value= Math.Round(((double.Parse(_indicatorLeft.ListFingers[0].PI) + double.Parse(_indicatorRight.ListFingers[0].PI) + double.Parse(_indicatorRight.ListFingers[1].PI) + double.Parse(_indicatorRight.ListFingers[4].PI))) / 4,2)},
+                                                                             new SortedItemWithIndex { Label="QT",Value= Math.Round(((double.Parse(_indicatorLeft.ListFingers[0].PI) + double.Parse(_indicatorRight.ListFingers[0].PI) + double.Parse(_indicatorRight.ListFingers[1].PI))) / 3,2)},
+                                                                             new SortedItemWithIndex { Label="TC",Value= Math.Round(((double.Parse(_indicatorRight.ListFingers[0].PI) + double.Parse(_indicatorRight.ListFingers[1].PI) + double.Parse(_indicatorRight.ListFingers[4].PI))) / 3,2)},
+                                                                             new SortedItemWithIndex { Label="YK",Value= Math.Round(((double.Parse(_indicatorLeft.ListFingers[0].PI) + double.Parse(_indicatorRight.ListFingers[0].PI) + double.Parse(_indicatorRight.ListFingers[1].PI) + double.Parse(_indicatorRight.ListFingers[2].PI) + double.Parse(_indicatorRight.ListFingers[4].PI))) / 5,2)},
+                                                                             new SortedItemWithIndex { Label="DV",Value= Math.Round(((double.Parse(_indicatorLeft.ListFingers[0].PI) + double.Parse(_indicatorRight.ListFingers[1].PI) + double.Parse(_indicatorRight.ListFingers[3].PI))) / 3,2)},
+                                                                             new SortedItemWithIndex { Label="NT",Value= Math.Round(((double.Parse(_indicatorLeft.ListFingers[1].PI) + double.Parse(_indicatorLeft.ListFingers[4].PI) + double.Parse(_indicatorRight.ListFingers[4].PI))) / 3,2)},
+                                                                             new SortedItemWithIndex { Label="AN",Value= Math.Round(((double.Parse(_indicatorLeft.ListFingers[1].PI) + double.Parse(_indicatorLeft.ListFingers[3].PI) + double.Parse(_indicatorRight.ListFingers[3].PI))) / 3,2)},
+                                                                             new SortedItemWithIndex { Label="TT",Value= Math.Round(((double.Parse(_indicatorLeft.ListFingers[2].PI) + double.Parse(_indicatorRight.ListFingers[0].PI) + double.Parse(_indicatorRight.ListFingers[1].PI))) / 3,2)},
+                                                                             new SortedItemWithIndex { Label="L",Value= Math.Round(((double.Parse(_indicatorLeft.ListFingers[0].PI) + double.Parse(_indicatorRight.ListFingers[0].PI) + double.Parse(_indicatorRight.ListFingers[1].PI) + double.Parse(_indicatorRight.ListFingers[3].PI))) / 4,2)},
+                                                                             new SortedItemWithIndex { Label="TK_KT",Value= Math.Round(((double.Parse(_indicatorLeft.ListFingers[1].PI) + double.Parse(_indicatorLeft.ListFingers[4].PI) + double.Parse(_indicatorRight.ListFingers[1].PI) + double.Parse(_indicatorRight.ListFingers[2].PI) + double.Parse(_indicatorRight.ListFingers[4].PI))) / 5,2)},
+                                                                             new SortedItemWithIndex { Label="BC",Value=  Math.Round(((double.Parse(_indicatorLeft.ListFingers[4].PI) + double.Parse(_indicatorRight.ListFingers[1].PI) + double.Parse(_indicatorRight.ListFingers[3].PI))) / 3,2)},
+                                                                             new SortedItemWithIndex { Label="NN",Value=  Math.Round(((double.Parse(_indicatorLeft.ListFingers[3].PI) + double.Parse(_indicatorRight.ListFingers[0].PI) + double.Parse(_indicatorRight.ListFingers[3].PI))) / 3,2)},
+                                                                             new SortedItemWithIndex { Label="SP",Value=  Math.Round(((double.Parse(_indicatorLeft.ListFingers[0].PI) + double.Parse(_indicatorRight.ListFingers[3].PI) + double.Parse(_indicatorRight.ListFingers[4].PI))) / 3,2)}};
+
+                foreach (var item in list)
+                {
+                    item.Index = list.OrderBy(x => x.Value).ToList().IndexOf(item) + 1;
+                }
+
+                return list;
+            }
+        }
+        public ObservableCollection<SortedItemWithIndex> ListNKBS
+        {
+            get
+            {
+                var list = new ObservableCollection<SortedItemWithIndex>() { new SortedItemWithIndex { Label="AN",Value= Math.Round((double.Parse(_indicatorLeft.ListFingers[3].PI) + double.Parse(_indicatorRight.ListFingers[3].PI)),2)},
+                                                                             new SortedItemWithIndex { Label="MT",Value= Math.Round((double.Parse(_indicatorLeft.ListFingers[4].PI) + double.Parse(_indicatorRight.ListFingers[4].PI)),2)},
+                                                                             new SortedItemWithIndex { Label="TD_ST",Value=  Math.Round((double.Parse(_indicatorLeft.ListFingers[1].PI) + double.Parse(_indicatorRight.ListFingers[1].PI)),2)},
+                                                                             new SortedItemWithIndex { Label="LĐ",Value=  Math.Round((double.Parse(_indicatorLeft.ListFingers[0].PI) + double.Parse(_indicatorRight.ListFingers[0].PI)),2)},
+                                                                             new SortedItemWithIndex { Label="VĐ",Value=  Math.Round((double.Parse(_indicatorLeft.ListFingers[2].PI) + double.Parse(_indicatorRight.ListFingers[2].PI)),2)}};
+
+                foreach (var item in list)
+                {
+                    item.Index = list.OrderBy(x => x.Value).ToList().IndexOf(item) + 1;
+                }
+
+                return list;
+            }
+        }
     }
 }
