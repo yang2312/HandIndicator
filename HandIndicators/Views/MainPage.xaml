@@ -3,7 +3,6 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:HandIndicators.Views"
       mc:Ignorable="d" 
       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
       Title="MainPage">
@@ -101,18 +100,19 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Grid.ColumnSpan="5" Margin="0,10">
+                    <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Grid.ColumnSpan="5">
                         <Label Content="ATD:"/>
                         <TextBox Width="150" Style="{StaticResource FillTextBox}" Text="{Binding ATDL,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
                     </StackPanel>
 
-                    <GroupBox Header="L1" Height="110" Grid.Row="1" Grid.Column="0">
+                    <GroupBox Header="L1" Height="130" Grid.Row="1" Grid.Column="0">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
@@ -120,84 +120,151 @@
 
                             <TextBox Grid.ColumnSpan="2" Text="{Binding FingerL1.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
 
-                            <Label Content="PI" Grid.Row="1"/>
-                            <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerL1.PI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+                            <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
 
-                            <Label Content="CAP" Grid.Row="2"/>
-                            <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource FillTextBox}" Text="{Binding FingerL1.CAP,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox" IsEnabled="{Binding FingerL1.IsCAPEnabled}"/>
+                                <Label Content="D1" Grid.Column="0"/>
+                                <Label Content="D2" Grid.Column="2"/>
+                                
+                                <TextBox Grid.Column="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerL1.Delta1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+                                
+                                <TextBox Grid.Column="3" Style="{StaticResource FillTextBox}" Text="{Binding FingerL1.Delta2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+                            </Grid>
+                            
+                            <Label Content="PI" Grid.Row="2"/>
+                            <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource FillTextBox}" Text="{Binding FingerL1.PI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+
+                            <Label Content="CAP" Grid.Row="3"/>
+                            <TextBox Grid.Column="1" Grid.Row="3" Style="{StaticResource FillTextBox}" Text="{Binding FingerL1.CAP,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox" IsEnabled="{Binding FingerL1.IsCAPEnabled}"/>
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox Header="L2" Height="110" Margin="10,0,0,0" Grid.Row="1" Grid.Column="1">
+                    <GroupBox Header="L2" Height="130" Margin="10,0,0,0" Grid.Row="1" Grid.Column="1">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
                             <TextBox Grid.ColumnSpan="2" Text="{Binding FingerL2.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
-                            
-                            <Label Content="PI" Grid.Row="1"/>
-                            <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerL2.PI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
 
-                            <Label Content="CAP" Grid.Row="2"/>
-                            <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource FillTextBox}" Text="{Binding FingerL2.CAP,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox" IsEnabled="{Binding FingerL2.IsCAPEnabled}"/>
+                            <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Content="D1" Grid.Column="0"/>
+                                <Label Content="D2" Grid.Column="2"/>
+
+                                <TextBox Grid.Column="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerL2.Delta1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+
+                                <TextBox Grid.Column="3" Style="{StaticResource FillTextBox}" Text="{Binding FingerL2.Delta2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+                            </Grid>
+
+                            <Label Content="PI" Grid.Row="2"/>
+                            <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource FillTextBox}" Text="{Binding FingerL2.PI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+
+                            <Label Content="CAP" Grid.Row="3"/>
+                            <TextBox Grid.Column="1" Grid.Row="3" Style="{StaticResource FillTextBox}" Text="{Binding FingerL2.CAP,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox" IsEnabled="{Binding FingerL2.IsCAPEnabled}"/>
 
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox Header="L3" Height="110" Margin="10,0,0,0" Grid.Row="1" Grid.Column="2">
+                    <GroupBox Header="L3" Height="130" Margin="10,0,0,0" Grid.Row="1" Grid.Column="2">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
                             <TextBox Grid.ColumnSpan="2" Text="{Binding FingerL3.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
-                            
-                            <Label Content="PI" Grid.Row="1"/>
-                            <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerL3.PI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
 
-                            <Label Content="CAP" Grid.Row="2"/>
-                            <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource FillTextBox}" Text="{Binding FingerL3.CAP,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox" IsEnabled="{Binding FingerL3.IsCAPEnabled}"/>
+                            <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Content="D1" Grid.Column="0"/>
+                                <Label Content="D2" Grid.Column="2"/>
+
+                                <TextBox Grid.Column="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerL3.Delta1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+
+                                <TextBox Grid.Column="3" Style="{StaticResource FillTextBox}" Text="{Binding FingerL3.Delta2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+                            </Grid>
+
+                            <Label Content="PI" Grid.Row="2"/>
+                            <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource FillTextBox}" Text="{Binding FingerL3.PI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+
+                            <Label Content="CAP" Grid.Row="3"/>
+                            <TextBox Grid.Column="1" Grid.Row="3" Style="{StaticResource FillTextBox}" Text="{Binding FingerL3.CAP,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox" IsEnabled="{Binding FingerL3.IsCAPEnabled}"/>
 
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox Header="L4" Height="110" Margin="10,0,0,0" Grid.Row="1" Grid.Column="3">
+                    <GroupBox Header="L4" Height="130" Margin="10,0,0,0" Grid.Row="1" Grid.Column="3">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
                             <TextBox Grid.ColumnSpan="2" Text="{Binding FingerL4.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
-                            
-                            <Label Content="PI" Grid.Row="1"/>
-                            <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerL4.PI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
 
-                            <Label Content="CAP" Grid.Row="2"/>
-                            <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource FillTextBox}" Text="{Binding FingerL4.CAP,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"  IsEnabled="{Binding FingerL4.IsCAPEnabled}"/>
+                            <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Content="D1" Grid.Column="0"/>
+                                <Label Content="D2" Grid.Column="2"/>
+
+                                <TextBox Grid.Column="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerL4.Delta1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+
+                                <TextBox Grid.Column="3" Style="{StaticResource FillTextBox}" Text="{Binding FingerL4.Delta2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+                            </Grid>
+
+                            <Label Content="PI" Grid.Row="2"/>
+                            <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource FillTextBox}" Text="{Binding FingerL4.PI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+
+                            <Label Content="CAP" Grid.Row="3"/>
+                            <TextBox Grid.Column="1" Grid.Row="3" Style="{StaticResource FillTextBox}" Text="{Binding FingerL4.CAP,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"  IsEnabled="{Binding FingerL4.IsCAPEnabled}"/>
 
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox Header="L5" Height="110" Margin="10,0,0,0" Grid.Row="1" Grid.Column="4">
+                    <GroupBox Header="L5" Height="130" Margin="10,0,0,0" Grid.Row="1" Grid.Column="4">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -207,15 +274,32 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
                             <TextBox Grid.ColumnSpan="2" Text="{Binding FingerL5.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
-                            
-                            <Label Content="PI" Grid.Row="1"/>
-                            <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerL5.PI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
 
-                            <Label Content="CAP" Grid.Row="2"/>
-                            <TextBox Grid.Column="2" Grid.Row="2" Style="{StaticResource FillTextBox}" Text="{Binding FingerL5.CAP,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox" IsEnabled="{Binding FingerL5.IsCAPEnabled}"/>
+                            <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Content="D1" Grid.Column="0"/>
+                                <Label Content="D2" Grid.Column="2"/>
+
+                                <TextBox Grid.Column="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerL5.Delta1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+
+                                <TextBox Grid.Column="3" Style="{StaticResource FillTextBox}" Text="{Binding FingerL5.Delta2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+                            </Grid>
+
+                            <Label Content="PI" Grid.Row="2"/>
+                            <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource FillTextBox}" Text="{Binding FingerL5.PI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+
+                            <Label Content="CAP" Grid.Row="3"/>
+                            <TextBox Grid.Column="2" Grid.Row="3" Style="{StaticResource FillTextBox}" Text="{Binding FingerL5.CAP,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox" IsEnabled="{Binding FingerL5.IsCAPEnabled}"/>
 
                         </Grid>
                     </GroupBox>
@@ -238,104 +322,172 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Grid.ColumnSpan="5" Margin="0,10">
+                    <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Grid.ColumnSpan="5">
                         <Label Content="ATD:"/>
                         <TextBox Width="150" Style="{StaticResource FillTextBox}" Text="{Binding ATDR,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
                     </StackPanel>
 
-                    <GroupBox Header="R1" Height="110" Grid.Row="1" Grid.Column="0">
+                    <GroupBox Header="R1" Height="130" Grid.Row="1" Grid.Column="0">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
                             <TextBox Grid.ColumnSpan="2" Text="{Binding FingerR1.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
-                            
-                            <Label Content="PI" Grid.Row="1"/>
-                            <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerR1.PI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
 
-                            <Label Content="CAP" Grid.Row="2"/>
-                            <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource FillTextBox}" Text="{Binding FingerR1.CAP,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox" IsEnabled="{Binding FingerR1.IsCAPEnabled}"/>
+                            <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Content="D1" Grid.Column="0"/>
+                                <Label Content="D2" Grid.Column="2"/>
+
+                                <TextBox Grid.Column="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerR1.Delta1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+
+                                <TextBox Grid.Column="3" Style="{StaticResource FillTextBox}" Text="{Binding FingerR1.Delta2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+                            </Grid>
+
+                            <Label Content="PI" Grid.Row="2"/>
+                            <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource FillTextBox}" Text="{Binding FingerR1.PI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+
+                            <Label Content="CAP" Grid.Row="3"/>
+                            <TextBox Grid.Column="1" Grid.Row="3" Style="{StaticResource FillTextBox}" Text="{Binding FingerR1.CAP,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox" IsEnabled="{Binding FingerR1.IsCAPEnabled}"/>
 
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox Header="R2" Height="110" Margin="10,0,0,0" Grid.Row="1" Grid.Column="1">
+                    <GroupBox Header="R2" Height="130" Margin="10,0,0,0" Grid.Row="1" Grid.Column="1">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
                             <TextBox Grid.ColumnSpan="2" Text="{Binding FingerR2.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
-                            
-                            <Label Content="PI" Grid.Row="1"/>
-                            <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerR2.PI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
 
-                            <Label Content="CAP" Grid.Row="2"/>
-                            <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource FillTextBox}" Text="{Binding FingerR2.CAP,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox" IsEnabled="{Binding FingerR2.IsCAPEnabled}"/>
+                            <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Content="D1" Grid.Column="0"/>
+                                <Label Content="D2" Grid.Column="2"/>
+
+                                <TextBox Grid.Column="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerR2.Delta1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+
+                                <TextBox Grid.Column="3" Style="{StaticResource FillTextBox}" Text="{Binding FingerR2.Delta2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+                            </Grid>
+
+                            <Label Content="PI" Grid.Row="2"/>
+                            <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource FillTextBox}" Text="{Binding FingerR2.PI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+
+                            <Label Content="CAP" Grid.Row="3"/>
+                            <TextBox Grid.Column="1" Grid.Row="3" Style="{StaticResource FillTextBox}" Text="{Binding FingerR2.CAP,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox" IsEnabled="{Binding FingerR2.IsCAPEnabled}"/>
 
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox Header="R3" Height="110" Margin="10,0,0,0" Grid.Row="1" Grid.Column="2">
+                    <GroupBox Header="R3" Height="130" Margin="10,0,0,0" Grid.Row="1" Grid.Column="2">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
                             <TextBox Grid.ColumnSpan="2" Text="{Binding FingerR3.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
-                            
-                            <Label Content="PI" Grid.Row="1"/>
-                            <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerR3.PI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
 
-                            <Label Content="CAP" Grid.Row="2"/>
-                            <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource FillTextBox}" Text="{Binding FingerR3.CAP,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox" IsEnabled="{Binding FingerR3.IsCAPEnabled}"/>
+                            <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Content="D1" Grid.Column="0"/>
+                                <Label Content="D2" Grid.Column="2"/>
+
+                                <TextBox Grid.Column="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerR3.Delta1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+
+                                <TextBox Grid.Column="3" Style="{StaticResource FillTextBox}" Text="{Binding FingerR3.Delta2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+                            </Grid>
+
+                            <Label Content="PI" Grid.Row="2"/>
+                            <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource FillTextBox}" Text="{Binding FingerR3.PI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+
+                            <Label Content="CAP" Grid.Row="3"/>
+                            <TextBox Grid.Column="1" Grid.Row="3" Style="{StaticResource FillTextBox}" Text="{Binding FingerR3.CAP,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox" IsEnabled="{Binding FingerR3.IsCAPEnabled}"/>
 
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox Header="R4" Height="110" Margin="10,0,0,0" Grid.Row="1" Grid.Column="3">
+                    <GroupBox Header="R4" Height="130" Margin="10,0,0,0" Grid.Row="1" Grid.Column="3">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
                             <TextBox Grid.ColumnSpan="2" Text="{Binding FingerR4.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
-                            
-                            <Label Content="PI" Grid.Row="1"/>
-                            <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerR4.PI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
 
-                            <Label Content="CAP" Grid.Row="2"/>
-                            <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource FillTextBox}" Text="{Binding FingerR4.CAP,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox" IsEnabled="{Binding FingerR4.IsCAPEnabled}"/>
+                            <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Content="D1" Grid.Column="0"/>
+                                <Label Content="D2" Grid.Column="2"/>
+
+                                <TextBox Grid.Column="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerR4.Delta1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+
+                                <TextBox Grid.Column="3" Style="{StaticResource FillTextBox}" Text="{Binding FingerR4.Delta2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+                            </Grid>
+
+                            <Label Content="PI" Grid.Row="2"/>
+                            <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource FillTextBox}" Text="{Binding FingerR4.PI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+
+                            <Label Content="CAP" Grid.Row="3"/>
+                            <TextBox Grid.Column="1" Grid.Row="3" Style="{StaticResource FillTextBox}" Text="{Binding FingerR4.CAP,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox" IsEnabled="{Binding FingerR4.IsCAPEnabled}"/>
 
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox Header="R5" Height="110" Margin="10,0,0,0" Grid.Row="1" Grid.Column="4">
+                    <GroupBox Header="R5" Height="130" Margin="10,0,0,0" Grid.Row="1" Grid.Column="4">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -345,15 +497,32 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
                             <TextBox Grid.ColumnSpan="2" Text="{Binding FingerR5.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
-                            
-                            <Label Content="PI" Grid.Row="1"/>
-                            <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerR5.PI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
 
-                            <Label Content="CAP" Grid.Row="2"/>
-                            <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource FillTextBox}" Text="{Binding FingerR5.CAP,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox" IsEnabled="{Binding FingerR5.IsCAPEnabled}"/>
+                            <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Content="D1" Grid.Column="0"/>
+                                <Label Content="D2" Grid.Column="2"/>
+
+                                <TextBox Grid.Column="1" Style="{StaticResource FillTextBox}" Text="{Binding FingerR5.Delta1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+
+                                <TextBox Grid.Column="3" Style="{StaticResource FillTextBox}" Text="{Binding FingerR5.Delta2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+                            </Grid>
+
+                            <Label Content="PI" Grid.Row="2"/>
+                            <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource FillTextBox}" Text="{Binding FingerR5.PI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+
+                            <Label Content="CAP" Grid.Row="3"/>
+                            <TextBox Grid.Column="1" Grid.Row="3" Style="{StaticResource FillTextBox}" Text="{Binding FingerR5.CAP,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox" IsEnabled="{Binding FingerR5.IsCAPEnabled}"/>
 
                         </Grid>
                     </GroupBox>
@@ -473,32 +642,42 @@
             </GroupBox>
 
             <GroupBox Header="Hoạt động L + R" Style="{StaticResource ReportGroup}" Grid.Column="2">
-                <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="AL = "/>
-                        <Label Content="{Binding IndicatorResult.AL,StringFormat={}{0:#.##}}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="AL = "/>
+                            <Label Content="{Binding IndicatorResult.AL,StringFormat={}{0:#.##}}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="AR = "/>
+                            <Label Content="{Binding IndicatorResult.AR,StringFormat={}{0:#.##}}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Tổng %L = "/>
+                            <Label Content="{Binding IndicatorResult.SumPercentL}"/>
+                        </StackPanel>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="AR = "/>
-                        <Label Content="{Binding IndicatorResult.AR,StringFormat={}{0:#.##}}"/>
+
+                    <StackPanel Orientation="Vertical" Grid.Column="1">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Tổng %R = "/>
+                            <Label Content="{Binding IndicatorResult.SumPercentR}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="HS %L = "/>
+                            <Label Content="{Binding IndicatorResult.x,StringFormat=P}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="HS %R = "/>
+                            <Label Content="{Binding IndicatorResult.y,StringFormat=P}"/>
+                        </StackPanel>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Tổng %L = "/>
-                        <Label Content="{Binding IndicatorResult.SumPercentL}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Tổng %R = "/>
-                        <Label Content="{Binding IndicatorResult.SumPercentR}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="HS %L = "/>
-                        <Label Content="{Binding IndicatorResult.x,StringFormat=P}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="HS %R = "/>
-                        <Label Content="{Binding IndicatorResult.y,StringFormat=P}"/>
-                    </StackPanel>
-                </StackPanel>
+                </Grid>
             </GroupBox>
 
             <GroupBox Header="Phân bố" Style="{StaticResource ReportGroup}" Grid.Column="3">

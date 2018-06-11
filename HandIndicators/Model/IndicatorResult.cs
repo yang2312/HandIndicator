@@ -434,7 +434,7 @@ namespace HandIndicators.Model
 
                 foreach (var item in list)
                 {
-                    item.Index = list.OrderBy(x => x.Value).ToList().IndexOf(item) + 1;
+                    item.Index = list.OrderByDescending(x => x.Value).ToList().IndexOf(item) + 1;
                 }
 
                 return list;
@@ -457,7 +457,7 @@ namespace HandIndicators.Model
 
                 foreach(var item in list)
                 {
-                    item.Index = list.OrderBy(x => x.Value).ToList().IndexOf(item) + 1;
+                    item.Index = list.OrderByDescending(x => x.Value).ToList().IndexOf(item) + 1;
                 }
 
                 return list;
@@ -473,7 +473,7 @@ namespace HandIndicators.Model
 
                 foreach (var item in list)
                 {
-                    item.Index = list.OrderBy(x => x.Value).ToList().IndexOf(item) + 1;
+                    item.Index = list.OrderByDescending(x => x.Value).ToList().IndexOf(item) + 1;
                 }
 
                 return list;
@@ -496,18 +496,18 @@ namespace HandIndicators.Model
                     list.Add(_indicatorRight.ListFingers[i]);
                 }
 
-                var listOrderbyPI = list.OrderBy(x => double.Parse(x.PI)).ToList();
+                var listOrderByDescendingPI = list.OrderByDescending(x => double.Parse(x.PI)).ToList();
 
-                foreach (var item in listOrderbyPI)
+                foreach (var item in listOrderByDescendingPI)
                 {
-                    item.IndexPI = listOrderbyPI.IndexOf(item) + 1;
+                    item.IndexPI = listOrderByDescendingPI.IndexOf(item) + 1;
                 }
                 
 
-                var listOrderbyRI = list.OrderBy(x => x.RI).ToList();
-                foreach (var item in listOrderbyRI)
+                var listOrderByDescendingRI = list.OrderByDescending(x => x.RI).ToList();
+                foreach (var item in listOrderByDescendingRI)
                 {
-                    item.IndexRI = listOrderbyRI.IndexOf(item) + 1;
+                    item.IndexRI = listOrderByDescendingRI.IndexOf(item) + 1;
                 }
                 
                 return list;
@@ -533,7 +533,7 @@ namespace HandIndicators.Model
 
                 foreach (var item in list)
                 {
-                    item.Index = list.OrderBy(x => x.Value).ToList().IndexOf(item) + 1;
+                    item.Index = list.OrderByDescending(x => x.Value).ToList().IndexOf(item) + 1;
                 }
 
                 return list;
@@ -551,7 +551,7 @@ namespace HandIndicators.Model
 
                 foreach (var item in list)
                 {
-                    item.Index = list.OrderBy(x => x.Value).ToList().IndexOf(item) + 1;
+                    item.Index = list.OrderByDescending(x => x.Value).ToList().IndexOf(item) + 1;
                 }
 
                 return list;

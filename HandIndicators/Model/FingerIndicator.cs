@@ -20,22 +20,28 @@ namespace HandIndicators.Model
             get { return _type; }
             set
             {
-                _type = value;
+                _type = value.ToUpper();
                 if (_type.StartsWith("U"))
                 {
                     IsCAPEnabled = false;
                     CAP = "1.00";
+                    Delta1 = "0";
+                    Delta2 = "0";
                 }
                 else if (_type.StartsWith("A"))
                 {
                     IsCAPEnabled = false;
                     CAP = "Không xác định";
+                    Delta1 = "Không xác định";
+                    Delta2 = "Không xác định";
                 }
                 else
                 {
                     IsCAPEnabled = true;
                     if (!string.IsNullOrEmpty(CAP) && CAP.Equals("Không xác định"))
                         CAP = string.Empty;
+                    PI = Delta1;
+                    CAP = (double.Parse(Delta1) > double.Parse(Delta2)) ? ((double.Parse(Delta2) / double.Parse(Delta1) + 1).ToString()) : ((double.Parse(Delta1) / double.Parse(Delta2) + 1).ToString());
                 }
                 RaisePropertyChanged(nameof(Type));
             }
@@ -139,6 +145,31 @@ namespace HandIndicators.Model
             set
             {
                 _isCAPEnabled = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private string _delta1;
+        public string Delta1
+        {
+            get { return _delta1; }
+            set
+            {
+                _delta1 = value;
+                if (Type.StartsWith("W"))
+                {
+                    PI = _delta1;
+                }
+                RaisePropertyChanged();
+            }
+        }
+        private string _delta2;
+        public string Delta2
+        {
+            get { return _delta2; }
+            set
+            {
+                _delta2 = value;
                 RaisePropertyChanged();
             }
         }
