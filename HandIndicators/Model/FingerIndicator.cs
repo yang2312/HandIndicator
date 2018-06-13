@@ -40,8 +40,7 @@ namespace HandIndicators.Model
                     IsCAPEnabled = true;
                     if (!string.IsNullOrEmpty(CAP) && CAP.Equals("Không xác định"))
                         CAP = string.Empty;
-                    PI = Delta1;
-                    CAP = (double.Parse(Delta1) > double.Parse(Delta2)) ? ((double.Parse(Delta2) / double.Parse(Delta1) + 1).ToString()) : ((double.Parse(Delta1) / double.Parse(Delta2) + 1).ToString());
+                    
                 }
                 RaisePropertyChanged(nameof(Type));
             }
@@ -156,11 +155,29 @@ namespace HandIndicators.Model
             set
             {
                 _delta1 = value;
-                if (Type.StartsWith("W"))
+                RaisePropertyChanged();
+                if (Type.StartsWith("U"))
                 {
                     PI = _delta1;
                 }
-                RaisePropertyChanged();
+                else if (Type.StartsWith("W"))
+                {
+                    double temp1 = 0;
+                    double temp2 = 0;
+
+                    if (!string.IsNullOrEmpty(_delta1))
+                        temp1 = double.Parse(_delta1);
+                    PI = temp1.ToString();
+
+                    if (!string.IsNullOrEmpty(_delta2))
+                        temp2 = double.Parse(_delta2);
+                    else
+                    {
+                        CAP = "1";
+                        return;
+                    }
+                    CAP = (temp1 > temp2) ? ((temp2 / temp1 + 1).ToString()) : ((temp1 / temp2 + 1).ToString());
+                }
             }
         }
         private string _delta2;
@@ -171,6 +188,22 @@ namespace HandIndicators.Model
             {
                 _delta2 = value;
                 RaisePropertyChanged();
+                if (Type.StartsWith("W"))
+                {
+                    double temp1 = 0;
+                    double temp2 = 0;
+
+                    if (!string.IsNullOrEmpty(_delta1))
+                        temp1 = double.Parse(_delta1);
+                    else
+                    {
+                        CAP = "1";
+                        return;
+                    }
+                    if (!string.IsNullOrEmpty(_delta2))
+                        temp2 = double.Parse(_delta2);
+                    CAP = (temp1 > temp2) ? ((temp2 / temp1 + 1).ToString()) : ((temp1 / temp2 + 1).ToString());
+                }
             }
         }
     }

@@ -13,6 +13,7 @@
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
                 <Setter Property="TextAlignment" Value="Right"/>
                 <Setter Property="Margin" Value="5"/>
+                <Setter Property="FontSize" Value="12"/>
             </Style>
 
             <Style TargetType="Button" x:Key="CurveButton">
@@ -630,11 +631,11 @@
             <GroupBox Header="Năng lực" Style="{StaticResource ReportGroup}" Grid.Column="1">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="NL = "/>
+                        <Label Content="Chênh lệch BS_TĐ = "/>
                         <Label Content="{Binding IndicatorResult.NL,StringFormat={}{0:#.##}}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="TT = "/>
+                        <Label Content="Thực tế SD = "/>
                         <Label Content="{Binding IndicatorResult.TT_NL,StringFormat={}{0:#.##}}"/>
                     </StackPanel>
                     
@@ -650,32 +651,33 @@
 
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="AL = "/>
-                            <Label Content="{Binding IndicatorResult.AL,StringFormat={}{0:#.##}}"/>
+                            <Label Content="%R Bẩm sinh = "/>
+                            <Label Content="{Binding IndicatorResult.SumPercentR}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="AR = "/>
                             <Label Content="{Binding IndicatorResult.AR,StringFormat={}{0:#.##}}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="Tổng %L = "/>
-                            <Label Content="{Binding IndicatorResult.SumPercentL}"/>
+                            <Label Content="Hieu suất R = "/>
+                            <Label Content="{Binding IndicatorResult.y,StringFormat={}{0:#.##}}"/>
                         </StackPanel>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Grid.Column="1">
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="Tổng %R = "/>
-                            <Label Content="{Binding IndicatorResult.SumPercentR}"/>
+                            <Label Content="%L Bẩm sinh = "/>
+                            <Label Content="{Binding IndicatorResult.SumPercentL}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="HS %L = "/>
-                            <Label Content="{Binding IndicatorResult.x,StringFormat=P}"/>
+                            <Label Content="AL = "/>
+                            <Label Content="{Binding IndicatorResult.AL,StringFormat={}{0:#.##}}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="HS %R = "/>
-                            <Label Content="{Binding IndicatorResult.y,StringFormat=P}"/>
+                            <Label Content="Hieu suất L = "/>
+                            <Label Content="{Binding IndicatorResult.x,StringFormat={}{0:#.##}}"/>
                         </StackPanel>
+                        
                     </StackPanel>
                 </Grid>
             </GroupBox>
@@ -714,10 +716,21 @@
                     <ListView ItemTemplate="{StaticResource CustomIndexItemTemplate}" ItemsSource="{Binding IndicatorResult.ListNKBS,UpdateSourceTrigger=PropertyChanged}"/>
                 </GroupBox>
 
-                <GroupBox Header="NLNN" Grid.Row="1">
-                    <ListView ItemTemplate="{StaticResource CustomIndexItemTemplate}" ItemsSource="{Binding IndicatorResult.ListNLNN,UpdateSourceTrigger=PropertyChanged}"/>
-                </GroupBox>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
+                    <GroupBox Header="NLNN">
+                        <ListView ItemTemplate="{StaticResource CustomIndexItemTemplate}" ItemsSource="{Binding IndicatorResult.ListNLNN,UpdateSourceTrigger=PropertyChanged}"/>
+                    </GroupBox>
+
+                    <GroupBox Header="NLNN Phụ" Grid.Column="1">
+                        <ListView ItemTemplate="{StaticResource CustomIndexItemTemplate}" ItemsSource="{Binding IndicatorResult.ListNLNN_Sub,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+                    </GroupBox>
+                </Grid>
+                
             </Grid>
             
             
@@ -758,15 +771,17 @@
                 <ListView ItemTemplate="{StaticResource CustomPercentItemTemplate}" ItemsSource="{Binding IndicatorResult.ListVAK,UpdateSourceTrigger=PropertyChanged}"/>
             </GroupBox>
             
-            <GroupBox Header="NNăng động _ Phân tích" Style="{StaticResource ReportGroup}" Grid.Row="1" Grid.Column="3">
+            <GroupBox Header="Năng động _ Phân tích" Style="{StaticResource ReportGroup}" Grid.Row="1" Grid.Column="3">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
                         <Label Content="NĐ = "/>
                         <Label Content="{Binding IndicatorResult.TFRC,StringFormat={}{0:#.##}}"/>
+                        <Label Content="%"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="PT = "/>
                         <Label Content="{Binding IndicatorResult.TFRC,StringFormat={}{0:#.##}}"/>
+                        <Label Content="%"/>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
