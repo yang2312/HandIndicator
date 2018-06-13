@@ -13,7 +13,7 @@
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
                 <Setter Property="TextAlignment" Value="Right"/>
                 <Setter Property="Margin" Value="5"/>
-                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="FontSize" Value="10"/>
             </Style>
 
             <Style TargetType="Button" x:Key="CurveButton">
@@ -119,7 +119,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <TextBox Grid.ColumnSpan="2" Text="{Binding FingerL1.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+                            <TextBox Grid.ColumnSpan="2" FontSize="12" Text="{Binding FingerL1.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
 
                             <Grid Grid.Row="1" Grid.ColumnSpan="2">
                                 <Grid.ColumnDefinitions>
@@ -158,7 +158,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <TextBox Grid.ColumnSpan="2" Text="{Binding FingerL2.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+                            <TextBox Grid.ColumnSpan="2" FontSize="12" Text="{Binding FingerL2.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
 
                             <Grid Grid.Row="1" Grid.ColumnSpan="2">
                                 <Grid.ColumnDefinitions>
@@ -198,7 +198,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <TextBox Grid.ColumnSpan="2" Text="{Binding FingerL3.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+                            <TextBox Grid.ColumnSpan="2" FontSize="12" Text="{Binding FingerL3.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
 
                             <Grid Grid.Row="1" Grid.ColumnSpan="2">
                                 <Grid.ColumnDefinitions>
@@ -238,7 +238,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <TextBox Grid.ColumnSpan="2" Text="{Binding FingerL4.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+                            <TextBox Grid.ColumnSpan="2" FontSize="12" Text="{Binding FingerL4.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
 
                             <Grid Grid.Row="1" Grid.ColumnSpan="2">
                                 <Grid.ColumnDefinitions>
@@ -278,7 +278,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <TextBox Grid.ColumnSpan="2" Text="{Binding FingerL5.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+                            <TextBox Grid.ColumnSpan="2" FontSize="12" Text="{Binding FingerL5.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
 
                             <Grid Grid.Row="1" Grid.ColumnSpan="2">
                                 <Grid.ColumnDefinitions>
@@ -341,7 +341,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <TextBox Grid.ColumnSpan="2" Text="{Binding FingerR1.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+                            <TextBox Grid.ColumnSpan="2" FontSize="12" Text="{Binding FingerR1.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
 
                             <Grid Grid.Row="1" Grid.ColumnSpan="2">
                                 <Grid.ColumnDefinitions>
@@ -381,7 +381,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <TextBox Grid.ColumnSpan="2" Text="{Binding FingerR2.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+                            <TextBox Grid.ColumnSpan="2" FontSize="12" Text="{Binding FingerR2.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
 
                             <Grid Grid.Row="1" Grid.ColumnSpan="2">
                                 <Grid.ColumnDefinitions>
@@ -421,7 +421,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <TextBox Grid.ColumnSpan="2" Text="{Binding FingerR3.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+                            <TextBox Grid.ColumnSpan="2" FontSize="12" Text="{Binding FingerR3.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
 
                             <Grid Grid.Row="1" Grid.ColumnSpan="2">
                                 <Grid.ColumnDefinitions>
@@ -461,7 +461,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <TextBox Grid.ColumnSpan="2" Text="{Binding FingerR4.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+                            <TextBox Grid.ColumnSpan="2" FontSize="12" Text="{Binding FingerR4.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
 
                             <Grid Grid.Row="1" Grid.ColumnSpan="2">
                                 <Grid.ColumnDefinitions>
@@ -501,7 +501,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <TextBox Grid.ColumnSpan="2" Text="{Binding FingerR5.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+                            <TextBox Grid.ColumnSpan="2" FontSize="12" Text="{Binding FingerR5.Type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
 
                             <Grid Grid.Row="1" Grid.ColumnSpan="2">
                                 <Grid.ColumnDefinitions>
@@ -543,10 +543,10 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.7*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.3*"/>
             </Grid.ColumnDefinitions>
 
             <GroupBox Header="Số liệu" Style="{StaticResource ReportGroup}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
@@ -637,6 +637,7 @@
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Thực tế SD = "/>
                         <Label Content="{Binding IndicatorResult.TT_NL,StringFormat={}{0:#.##}}"/>
+                        <Label Content="%"/>
                     </StackPanel>
                     
                 </StackPanel>
@@ -660,7 +661,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Hieu suất R = "/>
-                            <Label Content="{Binding IndicatorResult.y,StringFormat={}{0:#.##}}"/>
+                            <Label Content="{Binding IndicatorResult.y}"/>
                         </StackPanel>
                     </StackPanel>
 
@@ -675,7 +676,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Hieu suất L = "/>
-                            <Label Content="{Binding IndicatorResult.x,StringFormat={}{0:#.##}}"/>
+                            <Label Content="{Binding IndicatorResult.x}"/>
                         </StackPanel>
                         
                     </StackPanel>
@@ -683,28 +684,35 @@
             </GroupBox>
 
             <GroupBox Header="Phân bố" Style="{StaticResource ReportGroup}" Grid.Column="3">
-                <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="TT = "/>
-                        <Label Content="{Binding IndicatorResult.TT_PB,StringFormat={}{0:#.##}}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="TT = "/>
+                            <Label Content="{Binding IndicatorResult.TT_PB,StringFormat={}{0:#.##}}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="T = "/>
+                            <Label Content="{Binding IndicatorResult.T_PB,StringFormat={}{0:#.##}}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Đ = "/>
+                            <Label Content="{Binding IndicatorResult.D_PB,StringFormat={}{0:#.##}}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="TD = "/>
+                            <Label Content="{Binding IndicatorResult.TD_PB,StringFormat={}{0:#.##}}"/>
+                        </StackPanel>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="T = "/>
-                        <Label Content="{Binding IndicatorResult.T_PB,StringFormat={}{0:#.##}}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Đ = "/>
-                        <Label Content="{Binding IndicatorResult.D_PB,StringFormat={}{0:#.##}}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="TD = "/>
-                        <Label Content="{Binding IndicatorResult.TD_PB,StringFormat={}{0:#.##}}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Grid.Column="1">
                         <Label Content="C = "/>
                         <Label Content="{Binding IndicatorResult.C_PB,StringFormat={}{0:#.##}}"/>
                     </StackPanel>
-                </StackPanel>
+                </Grid>
             </GroupBox>
 
             <Grid Grid.Column="4" Grid.RowSpan="3">
@@ -775,12 +783,12 @@
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
                         <Label Content="NĐ = "/>
-                        <Label Content="{Binding IndicatorResult.TFRC,StringFormat={}{0:#.##}}"/>
+                        <Label Content="{Binding IndicatorResult.ND}"/>
                         <Label Content="%"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="PT = "/>
-                        <Label Content="{Binding IndicatorResult.TFRC,StringFormat={}{0:#.##}}"/>
+                        <Label Content="{Binding IndicatorResult.PT}"/>
                         <Label Content="%"/>
                     </StackPanel>
                 </StackPanel>
@@ -790,13 +798,13 @@
                 <ListView ItemTemplate="{StaticResource CustomPercentItemTemplate}" ItemsSource="{Binding IndicatorResult.SortedListData,UpdateSourceTrigger=PropertyChanged}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn  Width="100" DisplayMemberBinding="{Binding Name}"/>
-                            <GridViewColumn Header="PI" Width="100" DisplayMemberBinding="{Binding PI}"/>
-                            <GridViewColumn Header="Index PI" Width="100" DisplayMemberBinding="{Binding IndexPI}"/>
-                            <GridViewColumn Header="AI" Width="100" DisplayMemberBinding="{Binding AI}"/>
-                            <GridViewColumn  Width="100" Header="RI" DisplayMemberBinding="{Binding RI}"/>
-                            <GridViewColumn Header="Index RI" Width="100" DisplayMemberBinding="{Binding IndexRI}"/>
-                            <GridViewColumn Header="Type" Width="100" DisplayMemberBinding="{Binding Type}"/>
+                            <GridViewColumn  Width="50" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="PI" Width="50" DisplayMemberBinding="{Binding PI}"/>
+                            <GridViewColumn Header="Index PI" Width="50" DisplayMemberBinding="{Binding IndexPI}"/>
+                            <GridViewColumn Header="AI" Width="50" DisplayMemberBinding="{Binding AI}"/>
+                            <GridViewColumn  Width="50" Header="RI" DisplayMemberBinding="{Binding RI}"/>
+                            <GridViewColumn Header="Index RI" Width="50" DisplayMemberBinding="{Binding IndexRI}"/>
+                            <GridViewColumn Header="Type" Width="50" DisplayMemberBinding="{Binding Type}"/>
                         </GridView>
                     </ListView.View>    
                 </ListView>

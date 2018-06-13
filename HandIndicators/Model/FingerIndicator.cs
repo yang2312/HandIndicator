@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using System;
 
 namespace HandIndicators.Model
 {
@@ -176,7 +177,7 @@ namespace HandIndicators.Model
                         CAP = "1";
                         return;
                     }
-                    CAP = (temp1 > temp2) ? ((temp2 / temp1 + 1).ToString()) : ((temp1 / temp2 + 1).ToString());
+                    CAP = (temp1 > temp2) ? (Math.Round((temp2 / temp1 + 1),2).ToString()) : (Math.Round((temp1 / temp2 + 1),2).ToString());
                 }
             }
         }
@@ -202,7 +203,7 @@ namespace HandIndicators.Model
                     }
                     if (!string.IsNullOrEmpty(_delta2))
                         temp2 = double.Parse(_delta2);
-                    CAP = (temp1 > temp2) ? ((temp2 / temp1 + 1).ToString()) : ((temp1 / temp2 + 1).ToString());
+                    CAP = (temp1 > temp2) ? (Math.Round((temp2 / temp1 + 1),2).ToString()) : (Math.Round((temp1 / temp2 + 1),2).ToString());
                 }
             }
         }
