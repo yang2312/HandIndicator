@@ -743,28 +743,36 @@
             
             
             <GroupBox Header="Chỉ số" Style="{StaticResource ReportGroup}" Grid.Row="1" Grid.Column="1">
-                <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="E = "/>
-                        <Label Content="{Binding IndicatorResult.E_CS,StringFormat={}{0:#.##}}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="E = "/>
+                            <Label Content="{Binding IndicatorResult.E_CS,StringFormat={}{0:#.##}}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="I = "/>
+                            <Label Content="{Binding IndicatorResult.I_CS,StringFormat={}{0:#.##}}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="A = "/>
+                            <Label Content="{Binding IndicatorResult.A_CS,StringFormat={}{0:#.##}}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="C = "/>
+                            <Label Content="{Binding IndicatorResult.C_CS,StringFormat={}{0:#.##}}"/>
+                        </StackPanel>
+                        
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="I = "/>
-                        <Label Content="{Binding IndicatorResult.I_CS,StringFormat={}{0:#.##}}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="A = "/>
-                        <Label Content="{Binding IndicatorResult.A_CS,StringFormat={}{0:#.##}}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="C = "/>
-                        <Label Content="{Binding IndicatorResult.C_CS,StringFormat={}{0:#.##}}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Grid.Column="1">
                         <Label Content="P = "/>
                         <Label Content="{Binding IndicatorResult.P_CS,StringFormat={}{0:#.##}}"/>
                     </StackPanel>
-                </StackPanel>
+                </Grid>
+                
             </GroupBox>
 
             <GroupBox Header="8 TMBS" Style="{StaticResource ReportGroup}" Grid.Row="2" Grid.Column="2">

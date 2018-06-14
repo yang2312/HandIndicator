@@ -246,9 +246,9 @@ namespace HandIndicators.Model
                 double result;
                 if (_indicatorRight.ListFingers[0].Type.StartsWith("A"))
                 {
-                    result = Math.Round((x * double.Parse(_indicatorRight.ListFingers[0].PI) * 2.7) / 100, 2);
+                    result = Math.Round((y * double.Parse(_indicatorRight.ListFingers[0].PI) * 2.7) / 100, 2);
                 }
-                else result = Math.Round((x * double.Parse(_indicatorRight.ListFingers[0].PI)) / 100, 2);
+                else result = Math.Round((y * double.Parse(_indicatorRight.ListFingers[0].PI)) / 100, 2);
                 _indicatorRight.ListFingers[0].RI = result;
                 return result;
             }
@@ -260,9 +260,9 @@ namespace HandIndicators.Model
                 double result;
                 if (_indicatorRight.ListFingers[1].Type.StartsWith("A"))
                 {
-                    result = Math.Round((x * double.Parse(_indicatorRight.ListFingers[1].PI) * 2.7) / 100, 2);
+                    result = Math.Round((y * double.Parse(_indicatorRight.ListFingers[1].PI) * 2.7) / 100, 2);
                 }
-                else result = Math.Round((x * double.Parse(_indicatorRight.ListFingers[1].PI)) / 100, 2);
+                else result = Math.Round((y * double.Parse(_indicatorRight.ListFingers[1].PI)) / 100, 2);
                 _indicatorRight.ListFingers[1].RI = result;
                 return result;
             }
@@ -274,9 +274,9 @@ namespace HandIndicators.Model
                 double result;
                 if (_indicatorRight.ListFingers[2].Type.StartsWith("A"))
                 {
-                    result = Math.Round((x * double.Parse(_indicatorRight.ListFingers[2].PI) * 2.7) / 100, 2);
+                    result = Math.Round((y * double.Parse(_indicatorRight.ListFingers[2].PI) * 2.7) / 100, 2);
                 }
-                else result = Math.Round((x * double.Parse(_indicatorRight.ListFingers[2].PI)) / 100, 2);
+                else result = Math.Round((y * double.Parse(_indicatorRight.ListFingers[2].PI)) / 100, 2);
                 _indicatorRight.ListFingers[2].RI = result;
                 return result;
             }
@@ -288,9 +288,9 @@ namespace HandIndicators.Model
                 double result;
                 if (_indicatorRight.ListFingers[3].Type.StartsWith("A"))
                 {
-                    result = Math.Round((x * double.Parse(_indicatorRight.ListFingers[3].PI) * 2.7) / 100, 2);
+                    result = Math.Round((y * double.Parse(_indicatorRight.ListFingers[3].PI) * 2.7) / 100, 2);
                 }
-                else result = Math.Round((x * double.Parse(_indicatorRight.ListFingers[3].PI)) / 100, 2);
+                else result = Math.Round((y * double.Parse(_indicatorRight.ListFingers[3].PI)) / 100, 2);
                 _indicatorRight.ListFingers[3].RI = result;
                 return result;
             }
@@ -302,9 +302,9 @@ namespace HandIndicators.Model
                 double result;
                 if (_indicatorRight.ListFingers[4].Type.StartsWith("A"))
                 {
-                    result = Math.Round((x * double.Parse(_indicatorRight.ListFingers[4].PI) * 2.7) / 100, 2);
+                    result = Math.Round((y * double.Parse(_indicatorRight.ListFingers[4].PI) * 2.7) / 100, 2);
                 }
-                else result = Math.Round((x * double.Parse(_indicatorRight.ListFingers[4].PI)) / 100, 2);
+                else result = Math.Round((y * double.Parse(_indicatorRight.ListFingers[4].PI)) / 100, 2);
                 _indicatorRight.ListFingers[4].RI = result;
                 return result;
             }
@@ -446,7 +446,7 @@ namespace HandIndicators.Model
             get
             {
                 var list = new ObservableCollection<SortedItemWithIndex>() { new SortedItemWithIndex { Label="XH",Value= Math.Round(double.Parse(_indicatorLeft.ListFingers[0].PI) * (_indicatorLeft.ListFingers[0].CAP.Equals("Không xác định")? 1.00 :double.Parse(_indicatorLeft.ListFingers[0].CAP)),2)},
-                                                                    new SortedItemWithIndex { Label="LG",Value= Math.Round(double.Parse(_indicatorLeft.ListFingers[1].PI) * (_indicatorLeft.ListFingers[1].CAP.Equals("Không xác định")? 1.00 :double.Parse(_indicatorLeft.ListFingers[1].CAP)),2)},
+                                                                    new SortedItemWithIndex { Label="LG",Value= Math.Round(double.Parse(_indicatorRight.ListFingers[1].PI) * (_indicatorRight.ListFingers[1].CAP.Equals("Không xác định")? 1.00 :double.Parse(_indicatorRight.ListFingers[1].CAP)),2)},
                                                                     new SortedItemWithIndex { Label="VĐ",
                                                                                     Value = Math.Round((((double.Parse(_indicatorLeft.ListFingers[2].PI) * (_indicatorLeft.ListFingers[2].CAP.Equals("Không xác định")? 1.00 :double.Parse(_indicatorLeft.ListFingers[2].CAP))) + (double.Parse(_indicatorRight.ListFingers[2].PI) * (_indicatorRight.ListFingers[2].CAP.Equals("Không xác định")? 1.00 :double.Parse(_indicatorRight.ListFingers[2].CAP)))) / 2),2)},
                                                                     new SortedItemWithIndex { Label="NN",Value= Math.Round(double.Parse(_indicatorRight.ListFingers[3].PI) * (_indicatorRight.ListFingers[3].CAP.Equals("Không xác định")? 1.00 :double.Parse(_indicatorRight.ListFingers[3].CAP)),2)},
