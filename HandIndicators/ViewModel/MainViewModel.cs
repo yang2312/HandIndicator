@@ -175,19 +175,16 @@ namespace HandIndicators.ViewModel
         #region Constructor
         public MainViewModel()
         {
-            Year = "1987";
-            ATDL = "37.5";
-            ATDR = "36.5";
-            FingerL1 = new FingerIndicator() { Type="U",Delta1="19.5"};
-            FingerL2 = new FingerIndicator() { Type = "U", Delta1 = "11.5" };
-            FingerL3 = new FingerIndicator() { Type = "A",PI="3.8" };
-            FingerL4 = new FingerIndicator() { Type = "U", Delta1 = "11.2" };
-            FingerL5 = new FingerIndicator() { Type = "A", PI="5" };
-            FingerR1 = new FingerIndicator() { Type = "W", Delta1 = "21.4",Delta2="18.2" };
-            FingerR2 = new FingerIndicator() { Type = "W", Delta1 = "13.8",Delta2="17.2" };
-            FingerR3 = new FingerIndicator() { Type = "A", PI="6.2" };
-            FingerR4 = new FingerIndicator() { Type = "W", Delta1 = "16.4",Delta2="8.5" };
-            FingerR5 = new FingerIndicator() { Type = "U", Delta1 = "12" };
+            FingerL1 = new FingerIndicator();
+            FingerL2 = new FingerIndicator();
+            FingerL3 = new FingerIndicator();
+            FingerL4 = new FingerIndicator();
+            FingerL5 = new FingerIndicator();
+            FingerR1 = new FingerIndicator();
+            FingerR2 = new FingerIndicator();
+            FingerR3 = new FingerIndicator();
+            FingerR4 = new FingerIndicator();
+            FingerR5 = new FingerIndicator();
         }
         #endregion
 

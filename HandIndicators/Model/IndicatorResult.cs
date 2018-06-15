@@ -635,14 +635,14 @@ namespace HandIndicators.Model
         {
             get
             {
-                return Math.Round(((_indicatorLeft.ListFingers[0].AI + _indicatorLeft.ListFingers[1].AI) * 100) / (_indicatorLeft.ListFingers[0].AI + _indicatorLeft.ListFingers[1].AI + _indicatorRight.ListFingers[0].AI + _indicatorRight.ListFingers[1].AI),2);
+                return Math.Round(((_indicatorLeft.ListFingers[0].RI + _indicatorLeft.ListFingers[1].RI) * 100) / (_indicatorLeft.ListFingers[0].RI + _indicatorLeft.ListFingers[1].RI + _indicatorRight.ListFingers[0].RI + _indicatorRight.ListFingers[1].RI),2);
             }
         }
         public double PT
         {
             get
             {
-                return Math.Round(((_indicatorRight.ListFingers[0].AI + _indicatorRight.ListFingers[1].AI) * 100) / (_indicatorLeft.ListFingers[0].AI + _indicatorLeft.ListFingers[1].AI + _indicatorRight.ListFingers[0].AI + _indicatorRight.ListFingers[1].AI),2);
+                return Math.Round(((_indicatorRight.ListFingers[0].RI + _indicatorRight.ListFingers[1].RI) * 100) / (_indicatorLeft.ListFingers[0].RI + _indicatorLeft.ListFingers[1].RI + _indicatorRight.ListFingers[0].RI + _indicatorRight.ListFingers[1].RI),2);
             }
         }
     }
