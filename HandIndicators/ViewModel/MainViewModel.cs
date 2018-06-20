@@ -192,7 +192,7 @@ namespace HandIndicators.ViewModel
         public void Calculate()
         {
             IndicatorResult = new IndicatorResult(new HandIndicator(new ObservableCollection<FingerIndicator>() { FingerL1,FingerL2,FingerL3,FingerL4,FingerL5},ATDL), 
-                                                  new HandIndicator(new ObservableCollection<FingerIndicator>() { FingerR1, FingerR2, FingerR3, FingerR4, FingerR5}, ATDL),Year);
+                                                  new HandIndicator(new ObservableCollection<FingerIndicator>() { FingerR1, FingerR2, FingerR3, FingerR4, FingerR5}, ATDR),Year);
             RaisePropertyChanged(nameof(IndicatorResult));
         }
         public bool IsDataValidated()

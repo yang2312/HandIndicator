@@ -16,7 +16,7 @@ namespace HandIndicators.Model
             get
             {
                 double _x = double.Parse(_indicatorLeft.ATD) * 100 / 35;
-                if (_x > 100) return 200 - _x;
+                if (_x > 100) return Math.Round(200 - _x,2);
                 return Math.Round(_x, 2);
             }
         }
@@ -25,7 +25,7 @@ namespace HandIndicators.Model
             get
             {
                 double _y = double.Parse(_indicatorRight.ATD) * 100 / 35;
-                if (_y > 100) return 200 - _y;
+                if (_y > 100) return Math.Round(200 - _y,2);
                 return Math.Round(_y, 2);
             }
         }
@@ -383,7 +383,7 @@ namespace HandIndicators.Model
             get
             {
                 return Math.Round((double.Parse(_indicatorLeft.ListFingers[0].PI) * (_indicatorLeft.ListFingers[0].CAP.Equals("Không xác định") ? 1.00 : double.Parse(_indicatorLeft.ListFingers[0].CAP))) + (double.Parse(_indicatorRight.ListFingers[0].PI) * (_indicatorRight.ListFingers[0].CAP.Equals("Không xác định") ? 1.00 : double.Parse(_indicatorRight.ListFingers[0].CAP)))
-                    + (70 - _atd) + (_indicatorLeft.ListFingers[0].AI + _indicatorRight.ListFingers[0].AI), 2);
+                    + (70 - _atd) + (_indicatorLeft.ListFingers[0].RI + _indicatorRight.ListFingers[0].RI), 2);
             }
         }
         public double I_CS
@@ -391,7 +391,7 @@ namespace HandIndicators.Model
             get
             {
                 return Math.Round((double.Parse(_indicatorLeft.ListFingers[1].PI) * (_indicatorLeft.ListFingers[1].CAP.Equals("Không xác định") ? 1.00 : double.Parse(_indicatorLeft.ListFingers[1].CAP))) + (double.Parse(_indicatorRight.ListFingers[1].PI) * (_indicatorRight.ListFingers[1].CAP.Equals("Không xác định") ? 1.00 : double.Parse(_indicatorRight.ListFingers[1].CAP)))
-                    + (70 - _atd) + (_indicatorLeft.ListFingers[1].AI + _indicatorRight.ListFingers[1].AI), 2);
+                    + (70 - _atd) + (_indicatorLeft.ListFingers[1].RI + _indicatorRight.ListFingers[1].RI), 2);
             }
         }
         public double A_CS
@@ -399,7 +399,7 @@ namespace HandIndicators.Model
             get
             {
                 return Math.Round((double.Parse(_indicatorLeft.ListFingers[2].PI) * (_indicatorLeft.ListFingers[2].CAP.Equals("Không xác định") ? 1.00 : double.Parse(_indicatorLeft.ListFingers[2].CAP))) + (double.Parse(_indicatorRight.ListFingers[2].PI) * (_indicatorRight.ListFingers[2].CAP.Equals("Không xác định") ? 1.00 : double.Parse(_indicatorRight.ListFingers[2].CAP)))
-                    + (70 - _atd) + (_indicatorLeft.ListFingers[2].AI + _indicatorRight.ListFingers[2].AI), 2);
+                    + (70 - _atd) + (_indicatorLeft.ListFingers[2].RI + _indicatorRight.ListFingers[2].RI), 2);
             }
         }
         public double C_CS
@@ -407,7 +407,7 @@ namespace HandIndicators.Model
             get
             {
                 return Math.Round((double.Parse(_indicatorLeft.ListFingers[3].PI) * (_indicatorLeft.ListFingers[3].CAP.Equals("Không xác định") ? 1.00 : double.Parse(_indicatorLeft.ListFingers[3].CAP))) + (double.Parse(_indicatorRight.ListFingers[3].PI) * (_indicatorRight.ListFingers[3].CAP.Equals("Không xác định") ? 1.00 : double.Parse(_indicatorRight.ListFingers[3].CAP)))
-                    + (70 - _atd) + (_indicatorLeft.ListFingers[3].AI + _indicatorRight.ListFingers[3].AI), 2);
+                    + (70 - _atd) + (_indicatorLeft.ListFingers[3].RI + _indicatorRight.ListFingers[3].RI), 2);
             }
         }
         public double P_CS
@@ -415,7 +415,7 @@ namespace HandIndicators.Model
             get
             {
                 return Math.Round((double.Parse(_indicatorLeft.ListFingers[4].PI) * (_indicatorLeft.ListFingers[4].CAP.Equals("Không xác định") ? 1.00 : double.Parse(_indicatorLeft.ListFingers[4].CAP))) + (double.Parse(_indicatorRight.ListFingers[4].PI) * (_indicatorRight.ListFingers[4].CAP.Equals("Không xác định") ? 1.00 : double.Parse(_indicatorRight.ListFingers[4].CAP)))
-                    + (70 - _atd) + (_indicatorLeft.ListFingers[4].AI + _indicatorRight.ListFingers[4].AI), 2);
+                    + (70 - _atd) + (_indicatorLeft.ListFingers[4].RI + _indicatorRight.ListFingers[4].RI), 2);
             }
         }
 
