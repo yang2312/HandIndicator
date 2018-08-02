@@ -15,18 +15,34 @@ namespace HandIndicators.Model
         {
             get
             {
-                double _x = double.Parse(_indicatorLeft.ATD) * 100 / 35;
-                if (_x > 100) return Math.Round(200 - _x,2);
-                return Math.Round(_x, 2);
+                //double _x = double.Parse(_indicatorLeft.ATD) * 100 / 35;
+                //if (_x > 100) return Math.Round(200 - _x,2);
+                //return Math.Round(_x, 2);
+                double sumRI = 0;
+                double sumPI = 0;
+                foreach (var finger in _indicatorLeft.ListFingers)
+                {
+                    sumRI += finger.RI;
+                    sumPI += double.Parse(finger.PI);
+                }
+                return Math.Round((sumRI * 100) / sumPI, 2);
             }
         }
         public double y
         {
             get
             {
-                double _y = double.Parse(_indicatorRight.ATD) * 100 / 35;
-                if (_y > 100) return Math.Round(200 - _y,2);
-                return Math.Round(_y, 2);
+                //double _y = double.Parse(_indicatorRight.ATD) * 100 / 35;
+                //if (_y > 100) return Math.Round(200 - _y,2);
+                //return Math.Round(_y, 2);
+                double sumRI = 0;
+                double sumPI = 0;
+                foreach (var finger in _indicatorRight.ListFingers)
+                {
+                    sumRI += finger.RI;
+                    sumPI += double.Parse(finger.PI);
+                }
+                return Math.Round((sumRI * 100) / sumPI,2);
             }
         }
         private double _sumCAPL = 0;
@@ -347,75 +363,115 @@ namespace HandIndicators.Model
         {
             get
             {
-                return Math.Round((double.Parse(_indicatorLeft.ListFingers[0].PI) * 100 / TFRC) + (double.Parse(_indicatorRight.ListFingers[0].PI) * 100 / TFRC), 2);
+                if(_indicatorLeft.ListFingers.Any(x=>x.Type.StartsWith("A")) && _indicatorRight.ListFingers.Any(x => x.Type.StartsWith("A")))
+                {
+                    //Include A
+                    return Math.Round((_indicatorLeft.ListFingers[0].RI +_indicatorRight.ListFingers[0].RI) * 100 / SumRI, 2);
+                }
+                else
+                {
+                    //Not include A
+                    return Math.Round((double.Parse(_indicatorLeft.ListFingers[0].PI) + double.Parse(_indicatorRight.ListFingers[0].PI)) * 100 / TFRC, 2);
+                }
             }
         }
         public double T_PB
         {
             get
             {
-                return Math.Round((double.Parse(_indicatorLeft.ListFingers[1].PI) * 100 / TFRC) + (double.Parse(_indicatorRight.ListFingers[1].PI) * 100 / TFRC), 2);
+                if (_indicatorLeft.ListFingers.Any(x => x.Type.StartsWith("A")) && _indicatorRight.ListFingers.Any(x => x.Type.StartsWith("A")))
+                {
+                    //Include A
+                    return Math.Round((_indicatorLeft.ListFingers[1].RI + _indicatorRight.ListFingers[1].RI) * 100 / SumRI, 2);
+                }
+                else
+                {
+                    //Not include A
+                    return Math.Round((double.Parse(_indicatorLeft.ListFingers[1].PI) + double.Parse(_indicatorRight.ListFingers[1].PI)) * 100 / TFRC, 2);
+                }
             }
         }
         public double D_PB
         {
             get
             {
-                return Math.Round((double.Parse(_indicatorLeft.ListFingers[2].PI) * 100 / TFRC) + (double.Parse(_indicatorRight.ListFingers[2].PI) * 100 / TFRC), 2);
+                if (_indicatorLeft.ListFingers.Any(x => x.Type.StartsWith("A")) && _indicatorRight.ListFingers.Any(x => x.Type.StartsWith("A")))
+                {
+                    //Include A
+                    return Math.Round((_indicatorLeft.ListFingers[2].RI + _indicatorRight.ListFingers[2].RI) * 100 / SumRI, 2);
+                }
+                else
+                {
+                    //Not include A
+                    return Math.Round((double.Parse(_indicatorLeft.ListFingers[2].PI) + double.Parse(_indicatorRight.ListFingers[2].PI)) * 100 / TFRC, 2);
+                }
             }
         }
         public double TD_PB
         {
             get
             {
-                return Math.Round((double.Parse(_indicatorLeft.ListFingers[3].PI) * 100 / TFRC) + (double.Parse(_indicatorRight.ListFingers[3].PI) * 100 / TFRC), 2);
+                if (_indicatorLeft.ListFingers.Any(x => x.Type.StartsWith("A")) && _indicatorRight.ListFingers.Any(x => x.Type.StartsWith("A")))
+                {
+                    //Include A
+                    return Math.Round((_indicatorLeft.ListFingers[3].RI + _indicatorRight.ListFingers[3].RI) * 100 / SumRI, 2);
+                }
+                else
+                {
+                    //Not include A
+                    return Math.Round((double.Parse(_indicatorLeft.ListFingers[3].PI) + double.Parse(_indicatorRight.ListFingers[3].PI)) * 100 / TFRC, 2);
+                }
             }
         }
         public double C_PB
         {
             get
             {
-                return Math.Round((double.Parse(_indicatorLeft.ListFingers[4].PI) * 100 / TFRC) + (double.Parse(_indicatorRight.ListFingers[4].PI) * 100 / TFRC), 2);
+                if (_indicatorLeft.ListFingers.Any(x => x.Type.StartsWith("A")) && _indicatorRight.ListFingers.Any(x => x.Type.StartsWith("A")))
+                {
+                    //Include A
+                    return Math.Round((_indicatorLeft.ListFingers[4].RI + _indicatorRight.ListFingers[4].RI) * 100 / SumRI, 2);
+                }
+                else
+                {
+                    //Not include A
+                    return Math.Round((double.Parse(_indicatorLeft.ListFingers[4].PI) + double.Parse(_indicatorRight.ListFingers[4].PI)) * 100 / TFRC, 2);
+                }
             }
         }
         public double E_CS
         {
             get
             {
-                return Math.Round((double.Parse(_indicatorLeft.ListFingers[0].PI) * (_indicatorLeft.ListFingers[0].CAP.Equals("Không xác định") ? 1.00 : double.Parse(_indicatorLeft.ListFingers[0].CAP))) + (double.Parse(_indicatorRight.ListFingers[0].PI) * (_indicatorRight.ListFingers[0].CAP.Equals("Không xác định") ? 1.00 : double.Parse(_indicatorRight.ListFingers[0].CAP)))
-                    + (70 - _atd) + (_indicatorLeft.ListFingers[0].RI + _indicatorRight.ListFingers[0].RI), 2);
+                return Math.Round((_indicatorLeft.ListFingers[0].RI + _indicatorRight.ListFingers[0].RI + _indicatorLeft.ListFingers[0].AI + _indicatorRight.ListFingers[0].AI + _indicatorLeft.ListFingers[1].RI + _indicatorLeft.ListFingers[1].AI), 2);
             }
         }
         public double I_CS
         {
             get
             {
-                return Math.Round((double.Parse(_indicatorLeft.ListFingers[1].PI) * (_indicatorLeft.ListFingers[1].CAP.Equals("Không xác định") ? 1.00 : double.Parse(_indicatorLeft.ListFingers[1].CAP))) + (double.Parse(_indicatorRight.ListFingers[1].PI) * (_indicatorRight.ListFingers[1].CAP.Equals("Không xác định") ? 1.00 : double.Parse(_indicatorRight.ListFingers[1].CAP)))
-                    + (70 - _atd) + (_indicatorLeft.ListFingers[1].RI + _indicatorRight.ListFingers[1].RI), 2);
+                return Math.Round((_indicatorLeft.ListFingers[0].RI + _indicatorRight.ListFingers[0].RI + _indicatorLeft.ListFingers[0].AI + _indicatorRight.ListFingers[0].AI + _indicatorRight.ListFingers[1].AI + _indicatorRight.ListFingers[1].RI), 2);
             }
         }
         public double A_CS
         {
             get
             {
-                return Math.Round((double.Parse(_indicatorLeft.ListFingers[2].PI) * (_indicatorLeft.ListFingers[2].CAP.Equals("Không xác định") ? 1.00 : double.Parse(_indicatorLeft.ListFingers[2].CAP))) + (double.Parse(_indicatorRight.ListFingers[2].PI) * (_indicatorRight.ListFingers[2].CAP.Equals("Không xác định") ? 1.00 : double.Parse(_indicatorRight.ListFingers[2].CAP)))
-                    + (70 - _atd) + (_indicatorLeft.ListFingers[2].RI + _indicatorRight.ListFingers[2].RI), 2);
+                return Math.Round((_indicatorLeft.ListFingers[0].RI + _indicatorRight.ListFingers[0].RI + _indicatorLeft.ListFingers[0].AI + _indicatorRight.ListFingers[0].AI + ((_indicatorLeft.ListFingers[2].AI + _indicatorRight.ListFingers[2].AI) / 2) + ((_indicatorLeft.ListFingers[2].RI + _indicatorRight.ListFingers[2].RI) / 2)), 2);
             }
         }
         public double C_CS
         {
             get
             {
-                return Math.Round((double.Parse(_indicatorLeft.ListFingers[3].PI) * (_indicatorLeft.ListFingers[3].CAP.Equals("Không xác định") ? 1.00 : double.Parse(_indicatorLeft.ListFingers[3].CAP))) + (double.Parse(_indicatorRight.ListFingers[3].PI) * (_indicatorRight.ListFingers[3].CAP.Equals("Không xác định") ? 1.00 : double.Parse(_indicatorRight.ListFingers[3].CAP)))
-                    + (70 - _atd) + (_indicatorLeft.ListFingers[3].RI + _indicatorRight.ListFingers[3].RI), 2);
+                return Math.Round((_indicatorLeft.ListFingers[0].RI + _indicatorRight.ListFingers[0].RI + _indicatorLeft.ListFingers[0].AI + _indicatorRight.ListFingers[0].AI + ((_indicatorLeft.ListFingers[3].AI + _indicatorRight.ListFingers[3].AI) / 2) + ((_indicatorLeft.ListFingers[3].RI + _indicatorRight.ListFingers[3].RI) / 2)), 2);
             }
         }
         public double P_CS
         {
             get
             {
-                return Math.Round((double.Parse(_indicatorLeft.ListFingers[4].PI) * (_indicatorLeft.ListFingers[4].CAP.Equals("Không xác định") ? 1.00 : double.Parse(_indicatorLeft.ListFingers[4].CAP))) + (double.Parse(_indicatorRight.ListFingers[4].PI) * (_indicatorRight.ListFingers[4].CAP.Equals("Không xác định") ? 1.00 : double.Parse(_indicatorRight.ListFingers[4].CAP)))
-                    + (70 - _atd) + (_indicatorLeft.ListFingers[4].RI + _indicatorRight.ListFingers[4].RI), 2);
+                return Math.Round((_indicatorLeft.ListFingers[0].RI + _indicatorRight.ListFingers[0].RI + _indicatorLeft.ListFingers[0].AI + _indicatorRight.ListFingers[0].AI + ((_indicatorLeft.ListFingers[4].AI + _indicatorRight.ListFingers[4].AI) / 2) + ((_indicatorLeft.ListFingers[4].RI + _indicatorRight.ListFingers[4].RI) / 2)), 2);
             }
         }
 

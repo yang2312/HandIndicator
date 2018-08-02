@@ -696,23 +696,28 @@
                         <StackPanel Orientation="Horizontal">
                             <Label Content="TT = "/>
                             <Label Content="{Binding IndicatorResult.TT_PB,StringFormat={}{0:#.##}}"/>
+                            <Label Content="%"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="T = "/>
                             <Label Content="{Binding IndicatorResult.T_PB,StringFormat={}{0:#.##}}"/>
+                            <Label Content="%"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Đ = "/>
                             <Label Content="{Binding IndicatorResult.D_PB,StringFormat={}{0:#.##}}"/>
+                            <Label Content="%"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="TD = "/>
                             <Label Content="{Binding IndicatorResult.TD_PB,StringFormat={}{0:#.##}}"/>
+                            <Label Content="%"/>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Column="1">
                         <Label Content="C = "/>
                         <Label Content="{Binding IndicatorResult.C_PB,StringFormat={}{0:#.##}}"/>
+                        <Label Content="%"/>
                     </StackPanel>
                 </Grid>
             </GroupBox>

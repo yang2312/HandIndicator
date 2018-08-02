@@ -32,7 +32,7 @@ namespace HandIndicators.Model
                 else if (_type.StartsWith("A"))
                 {
                     IsCAPEnabled = false;
-                    CAP = "Không xác định";
+                    CAP = Math.Round(AI / double.Parse(PI), 2).ToString(); ;
                     Delta1 = "Không xác định";
                     Delta2 = "Không xác định";
                 }
