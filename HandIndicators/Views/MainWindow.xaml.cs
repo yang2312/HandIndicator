@@ -1,8 +1,11 @@
 ﻿using HandIndicators.ViewModel;
 using System;
+using System.Drawing;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
 

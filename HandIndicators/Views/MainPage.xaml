@@ -3,6 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:enum="clr-namespace:HandIndicators.Model"
+      xmlns:local="clr-namespace:HandIndicators"
       mc:Ignorable="d" 
       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
       Title="MainPage">
@@ -36,6 +38,10 @@
                 <Setter Property="Margin" Value="5"/>
             </Style>
 
+            <Style TargetType="Label" x:Key="SmallSizeStyle">
+                <Setter Property="FontSize" Value="10"/>
+            </Style>
+
             <DataTemplate x:Key="CustomItemTemplate">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="{Binding Label}"/>
@@ -62,6 +68,8 @@
                     <Label Content="{Binding Index}"/>
                 </StackPanel>
             </DataTemplate>
+
+            <local:EnumBooleanConverter x:Key="EnumBooleanConverter"/>
         </ResourceDictionary>
     </Page.Resources>
     
@@ -78,6 +86,9 @@
             <TextBox Width="150" Style="{StaticResource FillTextBox}" Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
             <Label Content="Năm sinh :" Margin="10,0,0,0"/>
             <TextBox Width="150" Style="{StaticResource FillTextBox}" Text="{Binding Year,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"/>
+            <Label Content="Giới tính :" Margin="10,0,0,0"/>
+            <RadioButton IsChecked="{Binding SelectedGender, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={x:Static enum:Gender.Male}}" Content="Nam" VerticalAlignment="Center"/>
+            <RadioButton IsChecked="{Binding SelectedGender, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={x:Static enum:Gender.Female}}" Content="Nữ" VerticalAlignment="Center"/>
         </StackPanel>
 
         <Grid Grid.Row="1" HorizontalAlignment="Stretch" Margin="0,5">
@@ -550,82 +561,96 @@
             </Grid.ColumnDefinitions>
 
             <GroupBox Header="Số liệu" Style="{StaticResource ReportGroup}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="TFRC = "/>
-                            <Label Content="{Binding IndicatorResult.TFRC,StringFormat={}{0:0.00}}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="TAFRC = "/>
-                            <Label Content="{Binding IndicatorResult.TAFRC,StringFormat={}{0:#.##}}"/>
-                        </StackPanel>
-                        
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="TR/I = "/>
-                            <Label Content="{Binding IndicatorResult.SumRI,StringFormat={}{0:0.00}}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="R/I L1 = "/>
-                            <Label Content="{Binding IndicatorResult.RIL1,StringFormat={}{0:#.##}}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="R/I L2 = "/>
-                            <Label Content="{Binding IndicatorResult.RIL2,StringFormat={}{0:#.##}}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="R/I L3 = "/>
-                            <Label Content="{Binding IndicatorResult.RIL3,StringFormat={}{0:#.##}}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="R/I L4 = "/>
-                            <Label Content="{Binding IndicatorResult.RIL4,StringFormat={}{0:#.##}}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="R/I L5 = "/>
-                            <Label Content="{Binding IndicatorResult.RIL5,StringFormat={}{0:#.##}}"/>
-                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="TFRC = " Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.TFRC,StringFormat={}{0:0.00}}" Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.OverallTFRC,StringFormat={}({0})}" Style="{StaticResource SmallSizeStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="TAFRC = " Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.TAFRC,StringFormat={}{0:#.##}}" Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.OverallTAFRC,StringFormat={}({0})}" Style="{StaticResource SmallSizeStyle}"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="TR/I = " Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.SumRI,StringFormat={}{0:0.00}}" Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.OverallSumRI,StringFormat={}({0})}" Style="{StaticResource SmallSizeStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="R/I L1 = " Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.RIL1,StringFormat={}{0:#.##}}" Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.OverallRIL1,StringFormat={}({0})}" Style="{StaticResource SmallSizeStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="R/I L2 = " Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.RIL2,StringFormat={}{0:#.##}}" Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.OverallRIL2,StringFormat={}({0})}" Style="{StaticResource SmallSizeStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="R/I L3 = " Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.RIL3,StringFormat={}{0:#.##}}" Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.OverallRIL3,StringFormat={}({0})}" Style="{StaticResource SmallSizeStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="R/I L4 = " Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.RIL4,StringFormat={}{0:#.##}}" Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.OverallRIL4,StringFormat={}({0})}" Style="{StaticResource SmallSizeStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="R/I L5 = " Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.RIL5,StringFormat={}{0:#.##}}" Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.OverallRIL5,StringFormat={}({0})}" Style="{StaticResource SmallSizeStyle}"/>
+                            </StackPanel>
 
 
-                    </StackPanel>
+                        </StackPanel>
 
-                    <StackPanel Orientation="Vertical" Grid.Column="1">
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Tổng %L = "/>
-                            <Label Content="{Binding IndicatorResult.SumPercentL}"/>
+                        <StackPanel Orientation="Vertical" Grid.Column="1">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Tổng %L = " Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.SumPercentL}" Style="{StaticResource SmallSizeStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Tổng %R = " Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.SumPercentR}" Style="{StaticResource SmallSizeStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="R/I R1 = " Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.RIR1,StringFormat={}{0:#.##}}" Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.OverallRIR1,StringFormat={}({0})}" Style="{StaticResource SmallSizeStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="R/I R2 = " Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.RIR2,StringFormat={}{0:#.##}}" Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.OverallRIR2,StringFormat={}({0})}" Style="{StaticResource SmallSizeStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="R/I R3 = " Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.RIR3,StringFormat={}{0:#.##}}" Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.OverallRIR3,StringFormat={}({0})}" Style="{StaticResource SmallSizeStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="R/I R4 = " Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.RIR4,StringFormat={}{0:#.##}}" Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.OverallRIR4,StringFormat={}({0})}" Style="{StaticResource SmallSizeStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="R/I R5 = " Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.RIR5,StringFormat={}{0:#.##}}" Style="{StaticResource SmallSizeStyle}"/>
+                                <Label Content="{Binding IndicatorResult.OverallRIR5,StringFormat={}({0})}" Style="{StaticResource SmallSizeStyle}"/>
+                            </StackPanel>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Tổng %R = "/>
-                            <Label Content="{Binding IndicatorResult.SumPercentR}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="R/I R1 = "/>
-                            <Label Content="{Binding IndicatorResult.RIR1,StringFormat={}{0:#.##}}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="R/I R2 = "/>
-                            <Label Content="{Binding IndicatorResult.RIR2,StringFormat={}{0:#.##}}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="R/I R3 = "/>
-                            <Label Content="{Binding IndicatorResult.RIR3,StringFormat={}{0:#.##}}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="R/I R4 = "/>
-                            <Label Content="{Binding IndicatorResult.RIR4,StringFormat={}{0:#.##}}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="R/I R5 = "/>
-                            <Label Content="{Binding IndicatorResult.RIR5,StringFormat={}{0:#.##}}"/>
-                        </StackPanel>
-                    </StackPanel>
-                </Grid>
-                
+                    </Grid>
+                </ScrollViewer>
             </GroupBox>
 
             <GroupBox Header="Năng lực" Style="{StaticResource ReportGroup}" Grid.Column="1">
@@ -644,82 +669,86 @@
             </GroupBox>
 
             <GroupBox Header="Hoạt động L + R" Style="{StaticResource ReportGroup}" Grid.Column="2">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="%R Bẩm sinh = "/>
-                            <Label Content="{Binding IndicatorResult.SumPercentR}"/>
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="%R Bẩm sinh = "/>
+                                <Label Content="{Binding IndicatorResult.SumPercentR}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="AR = "/>
+                                <Label Content="{Binding IndicatorResult.AR,StringFormat={}{0:#.##}}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Hieu suất R = "/>
+                                <Label Content="{Binding IndicatorResult.HSR}"/>
+                                <Label Content="%"/>
+                            </StackPanel>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="AR = "/>
-                            <Label Content="{Binding IndicatorResult.AR,StringFormat={}{0:#.##}}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Hieu suất R = "/>
-                            <Label Content="{Binding IndicatorResult.y}"/>
-                            <Label Content="%"/>
-                        </StackPanel>
-                    </StackPanel>
 
-                    <StackPanel Orientation="Vertical" Grid.Column="1">
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="%L Bẩm sinh = "/>
-                            <Label Content="{Binding IndicatorResult.SumPercentL}"/>
+                        <StackPanel Orientation="Vertical" Grid.Column="1">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="%L Bẩm sinh = "/>
+                                <Label Content="{Binding IndicatorResult.SumPercentL}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="AL = "/>
+                                <Label Content="{Binding IndicatorResult.AL,StringFormat={}{0:#.##}}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Hieu suất L = "/>
+                                <Label Content="{Binding IndicatorResult.HSL}"/>
+                                <Label Content="%"/>
+                            </StackPanel>
+
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="AL = "/>
-                            <Label Content="{Binding IndicatorResult.AL,StringFormat={}{0:#.##}}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Hieu suất L = "/>
-                            <Label Content="{Binding IndicatorResult.x}"/>
-                            <Label Content="%"/>
-                        </StackPanel>
-                        
-                    </StackPanel>
-                </Grid>
+                    </Grid>
+                </ScrollViewer>
             </GroupBox>
 
             <GroupBox Header="Phân bố" Style="{StaticResource ReportGroup}" Grid.Column="3">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="TT = "/>
-                            <Label Content="{Binding IndicatorResult.TT_PB,StringFormat={}{0:#.##}}"/>
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="TT = "/>
+                                <Label Content="{Binding IndicatorResult.TT_PB,StringFormat={}{0:#.##}}"/>
+                                <Label Content="%"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="T = "/>
+                                <Label Content="{Binding IndicatorResult.T_PB,StringFormat={}{0:#.##}}"/>
+                                <Label Content="%"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Đ = "/>
+                                <Label Content="{Binding IndicatorResult.D_PB,StringFormat={}{0:#.##}}"/>
+                                <Label Content="%"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="TD = "/>
+                                <Label Content="{Binding IndicatorResult.TD_PB,StringFormat={}{0:#.##}}"/>
+                                <Label Content="%"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Column="1">
+                            <Label Content="C = "/>
+                            <Label Content="{Binding IndicatorResult.C_PB,StringFormat={}{0:#.##}}"/>
                             <Label Content="%"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="T = "/>
-                            <Label Content="{Binding IndicatorResult.T_PB,StringFormat={}{0:#.##}}"/>
-                            <Label Content="%"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Đ = "/>
-                            <Label Content="{Binding IndicatorResult.D_PB,StringFormat={}{0:#.##}}"/>
-                            <Label Content="%"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="TD = "/>
-                            <Label Content="{Binding IndicatorResult.TD_PB,StringFormat={}{0:#.##}}"/>
-                            <Label Content="%"/>
-                        </StackPanel>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Column="1">
-                        <Label Content="C = "/>
-                        <Label Content="{Binding IndicatorResult.C_PB,StringFormat={}{0:#.##}}"/>
-                        <Label Content="%"/>
-                    </StackPanel>
-                </Grid>
+                    </Grid>
+                </ScrollViewer>
             </GroupBox>
 
             <Grid Grid.Column="4" Grid.RowSpan="3">
@@ -750,36 +779,37 @@
             
             
             <GroupBox Header="Chỉ số" Style="{StaticResource ReportGroup}" Grid.Row="1" Grid.Column="1">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="E = "/>
-                            <Label Content="{Binding IndicatorResult.E_CS,StringFormat={}{0:#.##}}"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="E = "/>
+                                <Label Content="{Binding IndicatorResult.E_CS,StringFormat={}{0:#.##}}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="I = "/>
+                                <Label Content="{Binding IndicatorResult.I_CS,StringFormat={}{0:#.##}}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="A = "/>
+                                <Label Content="{Binding IndicatorResult.A_CS,StringFormat={}{0:#.##}}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="C = "/>
+                                <Label Content="{Binding IndicatorResult.C_CS,StringFormat={}{0:#.##}}"/>
+                            </StackPanel>
+
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="I = "/>
-                            <Label Content="{Binding IndicatorResult.I_CS,StringFormat={}{0:#.##}}"/>
+                        <StackPanel Orientation="Horizontal" Grid.Column="1">
+                            <Label Content="P = "/>
+                            <Label Content="{Binding IndicatorResult.P_CS,StringFormat={}{0:#.##}}"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="A = "/>
-                            <Label Content="{Binding IndicatorResult.A_CS,StringFormat={}{0:#.##}}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="C = "/>
-                            <Label Content="{Binding IndicatorResult.C_CS,StringFormat={}{0:#.##}}"/>
-                        </StackPanel>
-                        
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Column="1">
-                        <Label Content="P = "/>
-                        <Label Content="{Binding IndicatorResult.P_CS,StringFormat={}{0:#.##}}"/>
-                    </StackPanel>
-                </Grid>
-                
+                    </Grid>
+                </ScrollViewer>
             </GroupBox>
 
             <GroupBox Header="8 TMBS" Style="{StaticResource ReportGroup}" Grid.Row="2" Grid.Column="2">
@@ -815,8 +845,10 @@
                         <GridView>
                             <GridViewColumn  Width="50" DisplayMemberBinding="{Binding Name}"/>
                             <GridViewColumn Header="PI" Width="50" DisplayMemberBinding="{Binding PI}"/>
+                            <GridViewColumn Header="ĐG PI" Width="50" DisplayMemberBinding="{Binding OverallPI}"/>
                             <GridViewColumn Header="Index PI" Width="50" DisplayMemberBinding="{Binding IndexPI}"/>
                             <GridViewColumn Header="AI" Width="50" DisplayMemberBinding="{Binding AI}"/>
+                            <GridViewColumn Header="ĐG AI" Width="50" DisplayMemberBinding="{Binding OverallAI}"/>
                             <GridViewColumn  Width="50" Header="RI" DisplayMemberBinding="{Binding RI}"/>
                             <GridViewColumn Header="Index RI" Width="50" DisplayMemberBinding="{Binding IndexRI}"/>
                             <GridViewColumn Header="Type" Width="50" DisplayMemberBinding="{Binding Type}"/>

@@ -142,7 +142,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EnumBooleanConverter.cs" />
     <Compile Include="Model\FingerIndicator.cs" />
+    <Compile Include="Model\Gender.cs" />
     <Compile Include="Model\HandIndicator.cs" />
     <Compile Include="Model\IndicatorResult.cs" />
     <Compile Include="Model\SortedItemWithIndex.cs" />

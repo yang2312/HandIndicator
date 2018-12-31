@@ -170,6 +170,18 @@ namespace HandIndicators.ViewModel
                 RaisePropertyChanged();
             }
         }
+
+        private Gender _selectedGender;
+        public Gender SelectedGender
+        {
+            get { return _selectedGender; }
+            set
+            {
+                _selectedGender = value;
+                FingerL1.Gender = FingerL2.Gender = FingerL3.Gender = FingerL4.Gender = FingerL5.Gender = FingerR1.Gender = FingerR2.Gender = FingerR3.Gender = FingerR4.Gender = FingerR5.Gender = value;
+                RaisePropertyChanged();
+            }
+        }
         #endregion
 
         #region Constructor
@@ -192,7 +204,7 @@ namespace HandIndicators.ViewModel
         public void Calculate()
         {
             IndicatorResult = new IndicatorResult(new HandIndicator(new ObservableCollection<FingerIndicator>() { FingerL1,FingerL2,FingerL3,FingerL4,FingerL5},ATDL), 
-                                                  new HandIndicator(new ObservableCollection<FingerIndicator>() { FingerR1, FingerR2, FingerR3, FingerR4, FingerR5}, ATDR),Year);
+                                                  new HandIndicator(new ObservableCollection<FingerIndicator>() { FingerR1, FingerR2, FingerR3, FingerR4, FingerR5}, ATDR),Year,SelectedGender);
             RaisePropertyChanged(nameof(IndicatorResult));
         }
         public bool IsDataValidated()

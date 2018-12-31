@@ -11,13 +11,29 @@ namespace HandIndicators.Model
         private HandIndicator _indicatorRight;
         private double _atd = 0;
         private double _sumLastFingers = 0;
+        private Gender _gender;
         public double x
         {
             get
             {
-                //double _x = double.Parse(_indicatorLeft.ATD) * 100 / 35;
-                //if (_x > 100) return Math.Round(200 - _x,2);
-                //return Math.Round(_x, 2);
+                double _x = double.Parse(_indicatorLeft.ATD) * 100 / 35;
+                if (_x > 100) return Math.Round(200 - _x, 2);
+                return Math.Round(_x, 2);
+            }
+        }
+        public double y
+        {
+            get
+            {
+                double _y = double.Parse(_indicatorRight.ATD) * 100 / 35;
+                if (_y > 100) return Math.Round(200 - _y, 2);
+                return Math.Round(_y, 2);
+            }
+        }
+        public double HSL
+        {
+            get
+            {
                 double sumRI = 0;
                 double sumPI = 0;
                 foreach (var finger in _indicatorLeft.ListFingers)
@@ -28,13 +44,10 @@ namespace HandIndicators.Model
                 return Math.Round((sumRI * 100) / sumPI, 2);
             }
         }
-        public double y
+        public double HSR
         {
             get
             {
-                //double _y = double.Parse(_indicatorRight.ATD) * 100 / 35;
-                //if (_y > 100) return Math.Round(200 - _y,2);
-                //return Math.Round(_y, 2);
                 double sumRI = 0;
                 double sumPI = 0;
                 foreach (var finger in _indicatorRight.ListFingers)
@@ -42,16 +55,27 @@ namespace HandIndicators.Model
                     sumRI += finger.RI;
                     sumPI += double.Parse(finger.PI);
                 }
-                return Math.Round((sumRI * 100) / sumPI,2);
+                return Math.Round((sumRI * 100) / sumPI, 2);
             }
         }
         private double _sumCAPL = 0;
         private double _sumCAPR = 0;
 
-        public IndicatorResult(HandIndicator indicatorLeft, HandIndicator indicatorRight, string year)
+        public string OverallRIL1 { get; set; }
+        public string OverallRIL2 { get; set; }
+        public string OverallRIL3 { get; set; }
+        public string OverallRIL4 { get; set; }
+        public string OverallRIL5 { get; set; }
+        public string OverallRIR1 { get; set; }
+        public string OverallRIR2 { get; set; }
+        public string OverallRIR3 { get; set; }
+        public string OverallRIR4 { get; set; }
+        public string OverallRIR5 { get; set; }
+        public IndicatorResult(HandIndicator indicatorLeft, HandIndicator indicatorRight, string year, Gender gender)
         {
             _indicatorLeft = indicatorLeft;
             _indicatorRight = indicatorRight;
+            _gender = gender;
 
             double atd = (double.Parse(_indicatorLeft.ATD) + double.Parse(_indicatorRight.ATD)) / 2;
             if ((DateTime.Now.Year - int.Parse(year)) < 10)
@@ -76,6 +100,33 @@ namespace HandIndicators.Model
                 {
                     _sumLastFingers += double.Parse(_indicatorLeft.ListFingers[i].PI);
                 }
+
+                double result;
+                if (_indicatorLeft.ListFingers[i].Type.StartsWith("A"))
+                {
+                    result = Math.Round((x * double.Parse(_indicatorLeft.ListFingers[i].PI) * 2.7) / 100, 2);
+                }
+                else result = Math.Round((x * double.Parse(_indicatorLeft.ListFingers[i].PI)) / 100, 2);
+                _indicatorLeft.ListFingers[i].RI = result;
+                switch (i)
+                {
+                    case 0:
+                        OverallRIL1 = _indicatorLeft.ListFingers[i].OverallRI;
+                        break;
+                    case 1:
+                        OverallRIL2 = _indicatorLeft.ListFingers[i].OverallRI;
+                        break;
+                    case 2:
+                        OverallRIL3 = _indicatorLeft.ListFingers[i].OverallRI;
+                        break;
+                    case 3:
+                        OverallRIL4 = _indicatorLeft.ListFingers[i].OverallRI;
+                        break;
+                    default:
+                        OverallRIL5 = _indicatorLeft.ListFingers[i].OverallRI;
+                        break;
+                }
+                
             }
             for (int i = 0; i < _indicatorRight.ListFingers.Count; i++)
             {
@@ -83,6 +134,33 @@ namespace HandIndicators.Model
                 if (i >= 2)
                 {
                     _sumLastFingers += double.Parse(_indicatorRight.ListFingers[i].PI);
+                }
+
+                double result;
+                if (_indicatorRight.ListFingers[i].Type.StartsWith("A"))
+                {
+                    result = Math.Round((y * double.Parse(_indicatorRight.ListFingers[i].PI) * 2.7) / 100, 2);
+                }
+                else result = Math.Round((y * double.Parse(_indicatorRight.ListFingers[i].PI)) / 100, 2);
+                _indicatorRight.ListFingers[i].RI = result;
+                
+                switch (i)
+                {
+                    case 0:
+                        OverallRIR1 = _indicatorRight.ListFingers[i].OverallRI;
+                        break;
+                    case 1:
+                        OverallRIR2 = _indicatorRight.ListFingers[i].OverallRI;
+                        break;
+                    case 2:
+                        OverallRIR3 = _indicatorRight.ListFingers[i].OverallRI;
+                        break;
+                    case 3:
+                        OverallRIR4 = _indicatorRight.ListFingers[i].OverallRI;
+                        break;
+                    default:
+                        OverallRIR5 = _indicatorRight.ListFingers[i].OverallRI;
+                        break;
                 }
             }
         }
@@ -136,8 +214,98 @@ namespace HandIndicators.Model
                 {
                     result += double.Parse(finger.PI);
                 }
+
+                switch (_gender)
+                {
+                    case Gender.Male:
+                        if(result < 60)
+                        {
+                            OverallTFRC = "Rất thấp";
+                        }
+                        else if (result >= 60 && result <= 90)
+                        {
+                            OverallTFRC = "Thấp";
+                        }
+                        else if (result > 90 && result < 125)
+                        {
+                            OverallTFRC = "TB";
+                        }
+                        else if (result >= 125 && result < 145)
+                        {
+                            OverallTFRC = "Khá";
+                        }
+                        else if (result >= 145 && result <= 190)
+                        {
+                            OverallTFRC = "Cao";
+                        }
+                        else
+                        {
+                            OverallTFRC = "Rất cao";
+                        }
+                        break;
+                    default:
+                        if (result < 50)
+                        {
+                            OverallTFRC = "Rất thấp";
+                        }
+                        else if (result >= 50 && result <= 80)
+                        {
+                            OverallTFRC = "Thấp";
+                        }
+                        else if (result > 80 && result < 110)
+                        {
+                            OverallTFRC = "TB";
+                        }
+                        else if (result >= 110 && result < 125)
+                        {
+                            OverallTFRC = "Khá";
+                        }
+                        else if (result >= 125 && result <= 170)
+                        {
+                            OverallTFRC = "Cao";
+                        }
+                        else
+                        {
+                            OverallTFRC = "Rất cao";
+                        }
+                        break;
+                }
+
                 return Math.Round(result, 2);
             }
+        }
+        private string _overallTFRC;
+        public string OverallTFRC
+        {
+            get { return _overallTFRC; }
+            set
+            {
+                _overallTFRC = value;
+                RaisePropertyChanged();
+            }
+
+        }
+        private string _overallTAFRC;
+        public string OverallTAFRC
+        {
+            get { return _overallTAFRC; }
+            set
+            {
+                _overallTAFRC = value;
+                RaisePropertyChanged();
+            }
+
+        }
+        private string _overallSumRI;
+        public string OverallSumRI
+        {
+            get { return _overallSumRI; }
+            set
+            {
+                _overallSumRI = value;
+                RaisePropertyChanged();
+            }
+
         }
         public double TAFRC
         {
@@ -151,6 +319,61 @@ namespace HandIndicators.Model
                 foreach (FingerIndicator finger in _indicatorRight.ListFingers)
                 {
                     result += (double.Parse(finger.PI) * (finger.CAP.Equals("Không xác định") ? 1.00 : double.Parse(finger.CAP)));
+                }
+                switch (_gender)
+                {
+                    case Gender.Male:
+                        if (result < 60)
+                        {
+                            OverallTAFRC = "Rất thấp";
+                        }
+                        else if (result >= 60 && result <= 90)
+                        {
+                            OverallTAFRC = "Thấp";
+                        }
+                        else if (result > 90 && result < 125)
+                        {
+                            OverallTAFRC = "TB";
+                        }
+                        else if (result >= 125 && result < 145)
+                        {
+                            OverallTAFRC = "Khá";
+                        }
+                        else if (result >= 145 && result <= 190)
+                        {
+                            OverallTAFRC = "Cao";
+                        }
+                        else
+                        {
+                            OverallTAFRC = "Rất cao";
+                        }
+                        break;
+                    default:
+                        if (result < 50)
+                        {
+                            OverallTAFRC = "Rất thấp";
+                        }
+                        else if (result >= 50 && result <= 80)
+                        {
+                            OverallTAFRC = "Thấp";
+                        }
+                        else if (result > 80 && result < 110)
+                        {
+                            OverallTAFRC = "TB";
+                        }
+                        else if (result >= 110 && result < 125)
+                        {
+                            OverallTAFRC = "Khá";
+                        }
+                        else if (result >= 125 && result <= 170)
+                        {
+                            OverallTAFRC = "Cao";
+                        }
+                        else
+                        {
+                            OverallTAFRC = "Rất cao";
+                        }
+                        break;
                 }
                 return Math.Round(result, 2);
             }
@@ -189,140 +412,70 @@ namespace HandIndicators.Model
         {
             get
             {
-                double result;
-                if (_indicatorLeft.ListFingers[0].Type.StartsWith("A"))
-                {
-                    result = Math.Round((x * double.Parse(_indicatorLeft.ListFingers[0].PI) * 2.7) / 100, 2);
-                }
-                else result = Math.Round((x * double.Parse(_indicatorLeft.ListFingers[0].PI)) / 100, 2);
-                _indicatorLeft.ListFingers[0].RI = result;
-                return result;
+                return _indicatorLeft.ListFingers[0].RI;
             }
         }
         public double RIL2
         {
             get
             {
-                double result;
-                if (_indicatorLeft.ListFingers[1].Type.StartsWith("A"))
-                {
-                    result = Math.Round((x * double.Parse(_indicatorLeft.ListFingers[1].PI) * 2.7) / 100, 2);
-                }
-                else result = Math.Round((x * double.Parse(_indicatorLeft.ListFingers[1].PI)) / 100, 2);
-                _indicatorLeft.ListFingers[1].RI = result;
-                return result;
+                return _indicatorLeft.ListFingers[1].RI;
             }
         }
         public double RIL3
         {
             get
             {
-                double result;
-                if (_indicatorLeft.ListFingers[2].Type.StartsWith("A"))
-                {
-                    result = Math.Round((x * double.Parse(_indicatorLeft.ListFingers[2].PI) * 2.7) / 100, 2);
-                }
-                else result = Math.Round((x * double.Parse(_indicatorLeft.ListFingers[2].PI)) / 100, 2);
-                _indicatorLeft.ListFingers[2].RI = result;
-                return result;
+                return _indicatorLeft.ListFingers[2].RI;
             }
         }
         public double RIL4
         {
             get
             {
-                double result;
-                if (_indicatorLeft.ListFingers[3].Type.StartsWith("A"))
-                {
-                    result = Math.Round((x * double.Parse(_indicatorLeft.ListFingers[3].PI) * 2.7) / 100, 2);
-                }
-                else result = Math.Round((x * double.Parse(_indicatorLeft.ListFingers[3].PI)) / 100, 2);
-                _indicatorLeft.ListFingers[3].RI = result;
-                return result;
+                return _indicatorLeft.ListFingers[3].RI;
             }
         }
         public double RIL5
         {
             get
             {
-                double result;
-                if (_indicatorLeft.ListFingers[4].Type.StartsWith("A"))
-                {
-                    result = Math.Round((x * double.Parse(_indicatorLeft.ListFingers[4].PI) * 2.7) / 100, 2);
-                }
-                else result = Math.Round((x * double.Parse(_indicatorLeft.ListFingers[4].PI)) / 100, 2);
-                _indicatorLeft.ListFingers[4].RI = result;
-                return result;
+                return _indicatorLeft.ListFingers[4].RI;
             }
         }
         public double RIR1
         {
             get
             {
-                double result;
-                if (_indicatorRight.ListFingers[0].Type.StartsWith("A"))
-                {
-                    result = Math.Round((y * double.Parse(_indicatorRight.ListFingers[0].PI) * 2.7) / 100, 2);
-                }
-                else result = Math.Round((y * double.Parse(_indicatorRight.ListFingers[0].PI)) / 100, 2);
-                _indicatorRight.ListFingers[0].RI = result;
-                return result;
+                return _indicatorRight.ListFingers[0].RI;
             }
         }
         public double RIR2
         {
             get
             {
-                double result;
-                if (_indicatorRight.ListFingers[1].Type.StartsWith("A"))
-                {
-                    result = Math.Round((y * double.Parse(_indicatorRight.ListFingers[1].PI) * 2.7) / 100, 2);
-                }
-                else result = Math.Round((y * double.Parse(_indicatorRight.ListFingers[1].PI)) / 100, 2);
-                _indicatorRight.ListFingers[1].RI = result;
-                return result;
+                return _indicatorRight.ListFingers[1].RI;
             }
         }
         public double RIR3
         {
             get
             {
-                double result;
-                if (_indicatorRight.ListFingers[2].Type.StartsWith("A"))
-                {
-                    result = Math.Round((y * double.Parse(_indicatorRight.ListFingers[2].PI) * 2.7) / 100, 2);
-                }
-                else result = Math.Round((y * double.Parse(_indicatorRight.ListFingers[2].PI)) / 100, 2);
-                _indicatorRight.ListFingers[2].RI = result;
-                return result;
+                return _indicatorRight.ListFingers[2].RI;
             }
         }
         public double RIR4
         {
             get
             {
-                double result;
-                if (_indicatorRight.ListFingers[3].Type.StartsWith("A"))
-                {
-                    result = Math.Round((y * double.Parse(_indicatorRight.ListFingers[3].PI) * 2.7) / 100, 2);
-                }
-                else result = Math.Round((y * double.Parse(_indicatorRight.ListFingers[3].PI)) / 100, 2);
-                _indicatorRight.ListFingers[3].RI = result;
-                return result;
+                return _indicatorRight.ListFingers[3].RI;
             }
         }
         public double RIR5
         {
             get
             {
-                double result;
-                if (_indicatorRight.ListFingers[4].Type.StartsWith("A"))
-                {
-                    result = Math.Round((y * double.Parse(_indicatorRight.ListFingers[4].PI) * 2.7) / 100, 2);
-                }
-                else result = Math.Round((y * double.Parse(_indicatorRight.ListFingers[4].PI)) / 100, 2);
-                _indicatorRight.ListFingers[4].RI = result;
-                return result;
+                return _indicatorRight.ListFingers[4].RI;
             }
         }
 
@@ -330,7 +483,63 @@ namespace HandIndicators.Model
         {
             get
             {
-                return Math.Round(RIL1 + RIL2 + RIL3 + RIL4 + RIL5 + RIR1 + RIR2 + RIR3 + RIR4 + RIR5, 2);
+                var result = Math.Round(RIL1 + RIL2 + RIL3 + RIL4 + RIL5 + RIR1 + RIR2 + RIR3 + RIR4 + RIR5, 2);
+                switch (_gender)
+                {
+                    case Gender.Male:
+                        if (result < 60)
+                        {
+                            OverallSumRI = "Rất thấp";
+                        }
+                        else if (result >= 60 && result <= 90)
+                        {
+                            OverallSumRI = "Thấp";
+                        }
+                        else if (result > 90 && result < 125)
+                        {
+                            OverallSumRI = "TB";
+                        }
+                        else if (result >= 125 && result < 145)
+                        {
+                            OverallSumRI = "Khá";
+                        }
+                        else if (result >= 145 && result <= 190)
+                        {
+                            OverallSumRI = "Cao";
+                        }
+                        else
+                        {
+                            OverallSumRI = "Rất cao";
+                        }
+                        break;
+                    default:
+                        if (result < 50)
+                        {
+                            OverallSumRI = "Rất thấp";
+                        }
+                        else if (result >= 50 && result <= 80)
+                        {
+                            OverallSumRI = "Thấp";
+                        }
+                        else if (result > 80 && result < 110)
+                        {
+                            OverallSumRI = "TB";
+                        }
+                        else if (result >= 110 && result < 125)
+                        {
+                            OverallSumRI = "Khá";
+                        }
+                        else if (result >= 125 && result <= 170)
+                        {
+                            OverallSumRI = "Cao";
+                        }
+                        else
+                        {
+                            OverallSumRI = "Rất cao";
+                        }
+                        break;
+                }
+                return result;
             }
         }
 

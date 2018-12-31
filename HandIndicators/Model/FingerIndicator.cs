@@ -3,8 +3,9 @@ using System;
 
 namespace HandIndicators.Model
 {
-    public class FingerIndicator: ObservableObject
+    public class FingerIndicator : ObservableObject
     {
+        public Gender Gender { get; set; }
         private string _pi;
         public string PI
         {
@@ -12,7 +13,73 @@ namespace HandIndicators.Model
             set
             {
                 _pi = value;
+                if (!string.IsNullOrEmpty(_pi))
+                    switch (Gender)
+                    {
+                        case Gender.Male:
+                            if (double.Parse(_pi) < 6)
+                            {
+                                OverallPI = "Rất thấp";
+                            }
+                            else if (double.Parse(_pi) >= 6 && double.Parse(_pi) <= 9)
+                            {
+                                OverallPI = "Thấp";
+                            }
+                            else if (double.Parse(_pi) > 9 && double.Parse(_pi) < 12.5)
+                            {
+                                OverallPI = "TB";
+                            }
+                            else if (double.Parse(_pi) >= 12.5 && double.Parse(_pi) < 14.5)
+                            {
+                                OverallPI = "Khá";
+                            }
+                            else if (double.Parse(_pi) >= 14.5 && double.Parse(_pi) <= 19)
+                            {
+                                OverallPI = "Cao";
+                            }
+                            else
+                            {
+                                OverallPI = "Rất cao";
+                            }
+                            break;
+                        default:
+                            if (double.Parse(_pi) < 5)
+                            {
+                                OverallPI = "Rất thấp";
+                            }
+                            else if (double.Parse(_pi) >= 5 && double.Parse(_pi) <= 8)
+                            {
+                                OverallPI = "Thấp";
+                            }
+                            else if (double.Parse(_pi) > 8 && double.Parse(_pi) < 11)
+                            {
+                                OverallPI = "TB";
+                            }
+                            else if (double.Parse(_pi) >= 11 && double.Parse(_pi) < 12.5)
+                            {
+                                OverallPI = "Khá";
+                            }
+                            else if (double.Parse(_pi) >= 12.5 && double.Parse(_pi) <= 17)
+                            {
+                                OverallPI = "Cao";
+                            }
+                            else
+                            {
+                                OverallPI = "Rất cao";
+                            }
+                            break;
+                    }
                 RaisePropertyChanged(nameof(PI));
+                if (Type.StartsWith("A"))
+                {
+                    IsCAPEnabled = false;
+                    if (!string.IsNullOrEmpty(PI) && double.Parse(PI) > 0)
+                        CAP = Math.Round(AI / double.Parse(PI), 2).ToString();
+                    else CAP = "Không xác định";
+                    Delta1 = "Không xác định";
+                    Delta2 = "Không xác định";
+                    RaisePropertyChanged(nameof(CAP));
+                }
             }
         }
         private string _type;
@@ -32,7 +99,9 @@ namespace HandIndicators.Model
                 else if (_type.StartsWith("A"))
                 {
                     IsCAPEnabled = false;
-                    CAP = Math.Round(AI / double.Parse(PI), 2).ToString(); ;
+                    if (!string.IsNullOrEmpty(PI) && double.Parse(PI) > 0)
+                        CAP = Math.Round(AI / double.Parse(PI), 2).ToString();
+                    else CAP = "Không xác định";
                     Delta1 = "Không xác định";
                     Delta2 = "Không xác định";
                 }
@@ -41,7 +110,7 @@ namespace HandIndicators.Model
                     IsCAPEnabled = true;
                     if (!string.IsNullOrEmpty(CAP) && CAP.Equals("Không xác định"))
                         CAP = string.Empty;
-                    
+
                 }
                 RaisePropertyChanged(nameof(Type));
             }
@@ -63,13 +132,13 @@ namespace HandIndicators.Model
             {
                 try
                 {
-                    return !string.IsNullOrEmpty(Type) && (Type.StartsWith("W") || Type.StartsWith("U") || Type.StartsWith("A")) && double.Parse(PI) > 0 && (CAP.Equals("Không xác định") || double.Parse(CAP) > 0);
+                    return !string.IsNullOrEmpty(Type) && (Type.StartsWith("W") || Type.StartsWith("U") || Type.StartsWith("A")) && double.Parse(PI) > 0 && (CAP.Equals("Không xác định") || double.Parse(CAP) >= 0);
                 }
                 catch
                 {
                     return false;
                 }
-                
+
             }
         }
         private double _ai;
@@ -82,7 +151,37 @@ namespace HandIndicators.Model
             set
             {
                 _ai = value;
+                if (_ai < 10)
+                {
+                    OverallAI = "Thấp";
+                }
+                else if (_ai >= 10 && _ai <= 15)
+                {
+                    OverallAI = "TB";
+                }
+                else if (_ai > 15 && _ai <= 22)
+                {
+                    OverallAI = "Khá";
+                }
+                else if (_ai > 22 && _ai <= 30)
+                {
+                    OverallAI = "Tốt";
+                }
+                else
+                {
+                    OverallAI = "Xuất sắc";
+                }
                 RaisePropertyChanged();
+                if (Type.StartsWith("A"))
+                {
+                    IsCAPEnabled = false;
+                    if (!string.IsNullOrEmpty(PI) && double.Parse(PI) > 0)
+                        CAP = Math.Round(AI / double.Parse(PI), 2).ToString();
+                    else CAP = "Không xác định";
+                    Delta1 = "Không xác định";
+                    Delta2 = "Không xác định";
+                    RaisePropertyChanged(nameof(CAP));
+                }
             }
         }
 
@@ -96,6 +195,61 @@ namespace HandIndicators.Model
             set
             {
                 _ri = value;
+                switch (Gender)
+                {
+                    case Gender.Male:
+                        if (_ri < 6)
+                        {
+                            OverallRI = "Rất thấp";
+                        }
+                        else if (_ri >= 6 && _ri <= 9)
+                        {
+                            OverallRI = "Thấp";
+                        }
+                        else if (_ri > 9 && _ri < 12.5)
+                        {
+                            OverallRI = "TB";
+                        }
+                        else if (_ri >= 12.5 && _ri < 14.5)
+                        {
+                            OverallRI = "Khá";
+                        }
+                        else if (_ri >= 14.5 && _ri <= 19)
+                        {
+                            OverallRI = "Cao";
+                        }
+                        else
+                        {
+                            OverallRI = "Rất cao";
+                        }
+                        break;
+                    default:
+                        if (_ri < 5)
+                        {
+                            OverallRI = "Rất thấp";
+                        }
+                        else if (_ri >= 5 && _ri <= 8)
+                        {
+                            OverallRI = "Thấp";
+                        }
+                        else if (_ri > 8 && _ri < 11)
+                        {
+                            OverallRI = "TB";
+                        }
+                        else if (_ri >= 11 && _ri < 12.5)
+                        {
+                            OverallRI = "Khá";
+                        }
+                        else if (_ri >= 12.5 && _ri <= 17)
+                        {
+                            OverallRI = "Cao";
+                        }
+                        else
+                        {
+                            OverallRI = "Rất cao";
+                        }
+                        break;
+                }
                 RaisePropertyChanged();
             }
         }
@@ -163,12 +317,13 @@ namespace HandIndicators.Model
                 }
                 else if (Type.StartsWith("W"))
                 {
+                    PI = "0";
+
                     double temp1 = 0;
                     double temp2 = 0;
 
                     if (!string.IsNullOrEmpty(_delta1))
                         temp1 = double.Parse(_delta1);
-                    PI = temp1.ToString();
 
                     if (!string.IsNullOrEmpty(_delta2))
                         temp2 = double.Parse(_delta2);
@@ -177,7 +332,7 @@ namespace HandIndicators.Model
                         CAP = "1";
                         return;
                     }
-                    CAP = (temp1 > temp2) ? (Math.Round((temp2 / temp1 + 1),2).ToString()) : (Math.Round((temp1 / temp2 + 1),2).ToString());
+                    CAP = (temp1 > temp2) ? (Math.Round((temp2 / temp1 + 1), 2).ToString()) : (Math.Round((temp1 / temp2 + 1), 2).ToString());
                 }
             }
         }
@@ -203,9 +358,42 @@ namespace HandIndicators.Model
                     }
                     if (!string.IsNullOrEmpty(_delta2))
                         temp2 = double.Parse(_delta2);
-                    CAP = (temp1 > temp2) ? (Math.Round((temp2 / temp1 + 1),2).ToString()) : (Math.Round((temp1 / temp2 + 1),2).ToString());
+                    CAP = (temp1 > temp2) ? (Math.Round((temp2 / temp1 + 1), 2).ToString()) : (Math.Round((temp1 / temp2 + 1), 2).ToString());
                 }
             }
+        }
+        private string _overallPI;
+        public string OverallPI
+        {
+            get { return _overallPI; }
+            set
+            {
+                _overallPI = value;
+                RaisePropertyChanged();
+            }
+
+        }
+        private string _overallRI;
+        public string OverallRI
+        {
+            get { return _overallRI; }
+            set
+            {
+                _overallRI = value;
+                RaisePropertyChanged();
+            }
+
+        }
+        private string _overallAI;
+        public string OverallAI
+        {
+            get { return _overallAI; }
+            set
+            {
+                _overallAI = value;
+                RaisePropertyChanged();
+            }
+
         }
     }
 }
